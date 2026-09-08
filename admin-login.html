@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin Login | Kardam Writes</title><link rel="stylesheet" href="hamza_kardam_writes_website/style.css">
+<style>body{min-height:100vh;background:#0b1730;display:grid;place-items:center;padding:20px}.box{width:min(430px,100%);background:#fff;padding:32px;border-radius:16px;box-sizing:border-box}.box h1{font:700 32px 'Playfair Display',serif;margin:10px 0}.field{margin:14px 0}.field label{display:block;font-size:11px;font-weight:700;margin-bottom:6px}.field input{width:100%;padding:12px;border:1px solid #ddd;border-radius:7px;box-sizing:border-box}.box button{width:100%;padding:13px;border:0;border-radius:7px;background:#d7aa55;color:#0b1730;font-weight:800;cursor:pointer}.msg{margin-top:15px;padding:11px;background:#fff7df;font-size:12px;display:none}.back{font-size:12px}</style></head>
+<body><div class="box"><a class="back" href="hamza_kardam_writes_website/index.html">← Website</a><h1>Admin Login</h1><p>Hamza S.S Kardam Writes</p>
+<form id="login"><div class="field"><label>USERNAME</label><input id="u" autocomplete="username" required placeholder="officialhkardam2026"></div>
+<div class="field"><label>PASSWORD</label><input id="p" type="password" autocomplete="current-password" required></div>
+<button id="btn">Sign in</button></form><div id="msg" class="msg"></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script><script src="hamza_kardam_writes_website/supabase-client.js"></script>
+<script>
+const form=document.getElementById('login'),msg=document.getElementById('msg'),btn=document.getElementById('btn');
+function show(t){msg.textContent=t;msg.style.display='block'}
+form.addEventListener('submit',async e=>{e.preventDefault();msg.style.display='none';btn.disabled=true;btn.textContent='Signing in…';
+ try{
+  if(!window.kardamSupabase) throw new Error('Supabase is not configured yet. Add your Project URL and Publishable key to supabase-config.js.');
+  const username=document.getElementById('u').value.trim(), password=document.getElementById('p').value;
+  const email=username==='officialhkardam2026'?'hamzasskardamwrites@gmail.com':username;
+  const {data,error}=await kardamSupabase.auth.signInWithPassword({email,password});
+  if(error) throw error;
+  const {data:profile,error:pe}=await kardamSupabase.from('profiles').select('username,role').eq('id',data.user.id).single();
+  if(pe || !profile || !['admin','editor'].includes(profile.role)){await kardamSupabase.auth.signOut();throw new Error('This account is not authorized as staff. Add the user to public.profiles with role admin.');}
+  location.href='admin-dashboard.html';
+ }catch(err){show(err.message||'Login failed.')}finally{btn.disabled=false;btn.textContent='Sign in'}
+});
+</script></body></html>
