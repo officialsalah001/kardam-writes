@@ -1,21 +1,12 @@
 <!doctype html>
+
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-
-<title>Article | Hamza S.S Kardam Writes</title>
-
-<meta name="description" content="Read articles from Hamza S.S Kardam Writes.">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Article | Hamza S.S Kardam Writes</title><meta name="description" content="Read articles from Hamza S.S Kardam Writes.">
 <meta name="robots" content="index,follow">
-<meta name="theme-color" content="#0b1730">
-
-<link rel="canonical"
-href="https://officialsalah001.github.io/kardam-writes/article.html">
-
-<link rel="stylesheet" href="style.css">
-
-<style>
+<meta name="theme-color" content="#0b1730"><link rel="canonical"
+href="https://officialsalah001.github.io/kardam-writes/article.html"><link rel="stylesheet" href="style.css"><style>
 
 .articlePage{
   width:min(850px,92%);
@@ -73,6 +64,66 @@ href="https://officialsalah001.github.io/kardam-writes/article.html">
 
 .articleStat b{
   color:#0b1730;
+}
+
+
+/* =========================
+   LIKE SYSTEM
+========================= */
+
+.likeBox{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:18px;
+}
+
+.likeButton{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:11px 18px;
+  border:1px solid #d9dde5;
+  border-radius:999px;
+  background:#fff;
+  color:#0b1730;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.2s ease;
+}
+
+.likeButton:hover{
+  transform:translateY(-1px);
+  border-color:#b9c0cc;
+}
+
+.likeButton:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+  transform:none;
+}
+
+.likeButton.liked{
+  background:#0b1730;
+  color:#fff;
+  border-color:#0b1730;
+}
+
+.likeIcon{
+  font-size:18px;
+  line-height:1;
+}
+
+.likeCount{
+  font-size:13px;
+  color:#687386;
+}
+
+.likeStatus{
+  font-size:12px;
+  color:#687386;
 }
 
 
@@ -253,64 +304,26 @@ href="https://officialsalah001.github.io/kardam-writes/article.html">
   gap:7px;
 }
 
+.likeButton{
+  padding:10px 16px;
 }
 
-</style>
-</head>
+}
 
-
-<body>
-
-
-<header>
-
-<div class="wrap nav">
-
-<a class="logo" href="index.html">
-
-<i>K</i>
+</style></head><body><header><div class="wrap nav"><a class="logo" href="index.html"><i>K</i>
 
 <span>
 Hamza S.S
 <small>KARDAM WRITES</small>
-</span>
-
-</a>
-
-<a class="wa" href="https://wa.me/2347077777636">
+</span></a><a class="wa" href="https://wa.me/2347077777636">
 WhatsApp
-</a>
-
-</div>
-
-</header>
-
-
-<main class="articlePage">
-
-<a class="back" href="index.html#articles">
+</a></div></header><main class="articlePage"><a class="back" href="index.html#articles">
 ← Back to articles
-</a>
-
-<div id="state">
+</a><div id="state">
 Loading article...
-</div>
-
-</main>
-
-
-<!-- =========================
+</div></main><!-- =========================
      SUPABASE
-========================= -->
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script src="supabase-config.js"></script>
-
-<script src="supabase-client.js"></script>
-
-
-<script>
+========================= --><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script><script src="supabase-client.js"></script><script>
 
 (function(){
 
@@ -442,6 +455,52 @@ opinion:"💭 Opinion / Ra'ayi"
 return labels[category] ||
 category ||
 "Article";
+
+}
+
+
+/* =========================
+   VISITOR ID
+========================= */
+
+function getVisitorId(){
+
+const key =
+"kardam_writes_visitor_id";
+
+let visitorId =
+localStorage.getItem(key);
+
+if(!visitorId){
+
+if(
+window.crypto &&
+typeof window.crypto.randomUUID === "function"
+){
+
+visitorId =
+window.crypto.randomUUID();
+
+}else{
+
+visitorId =
+"visitor_" +
+Date.now() +
+"_" +
+Math.random()
+.toString(36)
+.substring(2);
+
+}
+
+localStorage.setItem(
+key,
+visitorId
+);
+
+}
+
+return visitorId;
 
 }
 
@@ -641,6 +700,26 @@ esc(a.views || 0)+
 
 "</div>"+
 
+"</div>"+
+
+
+'<div class="likeBox">'+
+
+'<button '+
+'type="button" '+
+'class="likeButton" '+
+'id="likeButton">'+
+
+'<span class="likeIcon" id="likeIcon">👍</span>'+
+
+'<span id="likeText">Like</span>'+
+
+"</button>"+
+
+'<span class="likeCount" id="likeCount">0 likes</span>'+
+
+'<span class="likeStatus" id="likeStatus"></span>'+
+
 "</div>";
 
 
@@ -697,6 +776,16 @@ viewError
 
 
 /* =========================
+   LIKE SYSTEM
+========================= */
+
+await setupLikes(
+sb,
+Number(id)
+);
+
+
+/* =========================
    COMMENTS
 ========================= */
 
@@ -717,6 +806,343 @@ state.innerHTML =
 "<p>Please try again later.</p>";
 
 }
+
+}
+
+
+/* =========================
+   LIKE SYSTEM
+========================= */
+
+async function setupLikes(
+sb,
+articleId
+){
+
+const button =
+document.getElementById(
+"likeButton"
+);
+
+
+const icon =
+document.getElementById(
+"likeIcon"
+);
+
+
+const text =
+document.getElementById(
+"likeText"
+);
+
+
+const count =
+document.getElementById(
+"likeCount"
+);
+
+
+const status =
+document.getElementById(
+"likeStatus"
+);
+
+
+if(
+!button ||
+!icon ||
+!text ||
+!count
+){
+
+return;
+
+}
+
+
+let visitorId;
+
+
+try{
+
+visitorId =
+getVisitorId();
+
+}catch(error){
+
+console.error(
+"Visitor ID error:",
+error
+);
+
+return;
+
+}
+
+
+/* =========================
+   LOAD LIKE STATE
+========================= */
+
+async function loadLikeState(){
+
+try{
+
+const totalResult =
+await sb
+.from("article_likes")
+.select(
+"id",
+{
+count:"exact",
+head:true
+}
+)
+.eq(
+"article_id",
+articleId
+);
+
+
+if(totalResult.error){
+
+console.error(
+"Like count error:",
+totalResult.error
+);
+
+count.textContent =
+"0 likes";
+
+}else{
+
+count.textContent =
+Number(
+totalResult.count || 0
+).toLocaleString()+
+" "+
+(
+Number(totalResult.count || 0) === 1
+? "like"
+: "likes"
+);
+
+}
+
+
+/* =========================
+   CHECK CURRENT VISITOR
+========================= */
+
+const mineResult =
+await sb
+.from("article_likes")
+.select("id")
+.eq(
+"article_id",
+articleId
+)
+.eq(
+"visitor_id",
+visitorId
+)
+.limit(1);
+
+
+if(mineResult.error){
+
+console.error(
+"Like state error:",
+mineResult.error
+);
+
+return;
+
+}
+
+
+const liked =
+Array.isArray(mineResult.data) &&
+mineResult.data.length > 0;
+
+
+if(liked){
+
+button.classList.add("liked");
+
+icon.textContent =
+"❤️";
+
+text.textContent =
+"Liked";
+
+}else{
+
+button.classList.remove("liked");
+
+icon.textContent =
+"👍";
+
+text.textContent =
+"Like";
+
+}
+
+}catch(error){
+
+console.error(
+"Like loading error:",
+error
+);
+
+}
+
+}
+
+
+/* =========================
+   LIKE / UNLIKE
+========================= */
+
+button.addEventListener(
+"click",
+async function(){
+
+button.disabled =
+true;
+
+status.textContent =
+"";
+
+
+const alreadyLiked =
+button.classList.contains(
+"liked"
+);
+
+
+try{
+
+if(alreadyLiked){
+
+status.textContent =
+"Removing like...";
+
+
+const deleteResult =
+await sb
+.from("article_likes")
+.delete()
+.eq(
+"article_id",
+articleId
+)
+.eq(
+"visitor_id",
+visitorId
+);
+
+
+if(deleteResult.error){
+
+console.error(
+"Unlike error:",
+deleteResult.error
+);
+
+status.textContent =
+"Unable to remove like.";
+
+return;
+
+}
+
+}else{
+
+status.textContent =
+"Liking...";
+
+
+const insertResult =
+await sb
+.from("article_likes")
+.insert({
+
+article_id:
+articleId,
+
+visitor_id:
+visitorId
+
+});
+
+
+if(insertResult.error){
+
+/*
+If the visitor already liked the article,
+the unique constraint prevents a duplicate.
+*/
+
+if(
+insertResult.error.code === "23505"
+){
+
+console.warn(
+"Like already exists."
+);
+
+}else{
+
+console.error(
+"Like insert error:",
+insertResult.error
+);
+
+status.textContent =
+"Unable to like this article.";
+
+return;
+
+}
+
+}
+
+}
+
+
+/* =========================
+   REFRESH LIKE DISPLAY
+========================= */
+
+await loadLikeState();
+
+status.textContent =
+"";
+
+
+}catch(error){
+
+console.error(
+"Like action error:",
+error
+);
+
+status.textContent =
+"Something went wrong. Please try again.";
+
+}finally{
+
+button.disabled =
+false;
+
+}
+
+});
+
+
+await loadLikeState();
 
 }
 
@@ -798,10 +1224,7 @@ box.innerHTML =
 'required '+
 'placeholder="Rubuta ra’ayinka a nan...">'+
 
-"</textarea>"+
-
-"</label>"+
-
+"</textarea>"+"</label>"+
 
 '<label class="honeypot" aria-hidden="true">'+
 
@@ -814,7 +1237,6 @@ box.innerHTML =
 
 "</label>"+
 
-
 '<button '+
 'type="submit" '+
 'id="commentButton">'+
@@ -823,7 +1245,6 @@ box.innerHTML =
 
 "</button>"+
 
-
 '<div '+
 'class="commentStatus" '+
 'id="commentStatus">'+
@@ -831,7 +1252,6 @@ box.innerHTML =
 "</div>"+
 
 "</form>"+
-
 
 '<div '+
 'class="commentList" '+
@@ -845,12 +1265,10 @@ box.innerHTML =
 
 "</div>";
 
-
 state.appendChild(box);
 
-
 /* =========================
-   ELEMENTS
+ELEMENTS
 ========================= */
 
 const form =
@@ -858,57 +1276,48 @@ document.getElementById(
 "commentForm"
 );
 
-
 const nameInput =
 document.getElementById(
 "commentName"
 );
-
 
 const emailInput =
 document.getElementById(
 "commentEmail"
 );
 
-
 const textInput =
 document.getElementById(
 "commentText"
 );
-
 
 const spamInput =
 document.getElementById(
 "website"
 );
 
-
 const button =
 document.getElementById(
 "commentButton"
 );
-
 
 const status =
 document.getElementById(
 "commentStatus"
 );
 
-
 const list =
 document.getElementById(
 "commentList"
 );
-
 
 const countElement =
 document.getElementById(
 "commentCount"
 );
 
-
 /* =========================
-   LOAD COMMENTS
+LOAD COMMENTS
 ========================= */
 
 async function loadComments(){
@@ -917,7 +1326,6 @@ list.innerHTML =
 '<div class="emptyComments">'+
 "Loading comments..."+
 "</div>";
-
 
 try{
 
@@ -935,7 +1343,6 @@ await sb
 ascending:false
 }
 );
-
 
 if(result.error){
 
@@ -960,13 +1367,11 @@ return;
 
 }
 
-
 const comments =
 result.data || [];
 
-
 /* =========================
-   COMMENT COUNT
+COMMENT COUNT
 ========================= */
 
 if(countElement){
@@ -976,7 +1381,6 @@ comments.length
 .toLocaleString();
 
 }
-
 
 if(!comments.length){
 
@@ -991,9 +1395,8 @@ return;
 
 }
 
-
 /* =========================
-   RENDER COMMENTS
+RENDER COMMENTS
 ========================= */
 
 list.innerHTML =
@@ -1027,7 +1430,6 @@ c.body ||
 
 }).join("");
 
-
 }catch(error){
 
 console.error(
@@ -1044,9 +1446,8 @@ list.innerHTML =
 
 }
 
-
 /* =========================
-   POST COMMENT
+POST COMMENT
 ========================= */
 
 form.addEventListener(
@@ -1055,29 +1456,23 @@ async function(e){
 
 e.preventDefault();
 
-
 status.textContent =
 "";
-
 
 status.style.color =
 "";
 
-
 const name =
 nameInput.value.trim();
-
 
 const email =
 emailInput.value.trim();
 
-
 const body =
 textInput.value.trim();
 
-
 /* =========================
-   HONEYPOT
+HONEYPOT
 ========================= */
 
 if(
@@ -1091,9 +1486,8 @@ return;
 
 }
 
-
 /* =========================
-   NAME VALIDATION
+NAME VALIDATION
 ========================= */
 
 if(name.length < 2){
@@ -1105,7 +1499,6 @@ return;
 
 }
 
-
 if(name.length > 60){
 
 status.textContent =
@@ -1115,9 +1508,8 @@ return;
 
 }
 
-
 /* =========================
-   EMAIL VALIDATION
+EMAIL VALIDATION
 ========================= */
 
 if(email.length > 120){
@@ -1129,10 +1521,9 @@ return;
 
 }
 
-
 if(
 email &&
-!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+!/^[^\s@]+@[^\s@]+.[^\s@]+$/.test(email)
 ){
 
 status.textContent =
@@ -1142,9 +1533,8 @@ return;
 
 }
 
-
 /* =========================
-   COMMENT VALIDATION
+COMMENT VALIDATION
 ========================= */
 
 if(body.length < 2){
@@ -1156,7 +1546,6 @@ return;
 
 }
 
-
 if(body.length > 1000){
 
 status.textContent =
@@ -1166,9 +1555,8 @@ return;
 
 }
 
-
 /* =========================
-   BUTTON
+BUTTON
 ========================= */
 
 button.disabled =
@@ -1177,13 +1565,11 @@ true;
 button.textContent =
 "Posting...";
 
-
 status.textContent =
 "Posting your comment...";
 
-
 /* =========================
-   INSERT DIRECTLY
+INSERT DIRECTLY
 ========================= */
 
 try{
@@ -1216,7 +1602,6 @@ status:
 
 });
 
-
 if(result.error){
 
 console.error(
@@ -1234,9 +1619,8 @@ return;
 
 }
 
-
 /* =========================
-   SUCCESS
+SUCCESS
 ========================= */
 
 status.textContent =
@@ -1245,16 +1629,13 @@ status.textContent =
 status.style.color =
 "#16803c";
 
-
 /* Clear form */
 
 form.reset();
 
-
 /* Reload comments immediately */
 
 await loadComments();
-
 
 }catch(error){
 
@@ -1281,25 +1662,21 @@ button.textContent =
 
 });
 
-
 /* =========================
-   INITIAL COMMENTS
+INITIAL COMMENTS
 ========================= */
 
 await loadComments();
 
 }
 
-
 /* =========================
-   START
+START
 ========================= */
 
 loadArticle();
 
 })();
 
-</script>
-
-</body>
+</script></body>
 </html>
