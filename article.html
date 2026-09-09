@@ -54,6 +54,26 @@ href="https://officialsalah001.github.io/kardam-writes/article.html">
   margin:15px 0 25px;
 }
 
+.articleStats{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:20px;
+}
+
+.articleStat{
+  padding:9px 13px;
+  border:1px solid #e4e6eb;
+  border-radius:8px;
+  background:#f8f9fb;
+  color:#687386;
+  font-size:12px;
+}
+
+.articleStat b{
+  color:#0b1730;
+}
+
 /* COMMENTS */
 
 .comments{
@@ -177,20 +197,68 @@ href="https://officialsalah001.github.io/kardam-writes/article.html">
   height:1px!important;
   overflow:hidden!important;
 }
+
+/* IMAGE FALLBACK */
+
+.articleImageFallback{
+  width:100%;
+  min-height:220px;
+  border-radius:14px;
+  margin:20px 0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,#14243f,#4c78a7);
+  color:#fff;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:2px;
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+.articlePage{
+  margin:35px auto;
+}
+
+.articleContent{
+  font-size:16px;
+  line-height:1.8;
+}
+
+.articleExcerpt{
+  font-size:16px;
+}
+
+.articleHero{
+  max-height:300px;
+}
+
+.articleStats{
+  gap:7px;
+}
+
+}
 </style>
 </head>
 
 <body>
 
 <header>
+
 <div class="wrap nav">
 
 <a class="logo" href="index.html">
+
 <i>K</i>
+
 <span>
 Hamza S.S
 <small>KARDAM WRITES</small>
 </span>
+
 </a>
 
 <a class="wa" href="https://wa.me/2347077777636">
@@ -198,7 +266,9 @@ WhatsApp
 </a>
 
 </div>
+
 </header>
+
 
 <main class="articlePage">
 
@@ -212,27 +282,37 @@ Loading article...
 
 </main>
 
+
 <!-- SUPABASE -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script src="supabase-config.js"></script>
+
 <script src="supabase-client.js"></script>
+
 
 <script>
 
 (function(){
 
-const state=document.getElementById("state");
+const state =
+document.getElementById("state");
 
-const id=new URLSearchParams(
+
+/* =========================
+   GET ARTICLE ID
+========================= */
+
+const id =
+new URLSearchParams(
 window.location.search
 ).get("id");
 
-/* ARTICLE ID CHECK */
 
 if(!id){
 
-state.innerHTML=
+state.innerHTML =
 "<h2>Article not found</h2>"+
 "<p>No article was selected.</p>";
 
@@ -240,11 +320,14 @@ return;
 
 }
 
-/* DATABASE CHECK */
+
+/* =========================
+   SUPABASE CHECK
+========================= */
 
 if(!window.kardamSupabase){
 
-state.innerHTML=
+state.innerHTML =
 "<h2>Connection error</h2>"+
 "<p>Database connection is unavailable.</p>";
 
@@ -252,9 +335,14 @@ return;
 
 }
 
-const sb=window.kardamSupabase;
 
-/* ESCAPE HTML */
+const sb =
+window.kardamSupabase;
+
+
+/* =========================
+   ESCAPE HTML
+========================= */
 
 function esc(value=""){
 
@@ -276,7 +364,10 @@ return {
 
 }
 
-/* DATE */
+
+/* =========================
+   DATE
+========================= */
 
 function formatDate(date){
 
@@ -301,6 +392,42 @@ return "";
 
 }
 
+
+/* =========================
+   CATEGORY LABEL
+========================= */
+
+function categoryLabel(category){
+
+const labels = {
+
+news:"📰 News / Labarai",
+
+politics:"🏛️ Politics / Siyasa",
+
+sports:"⚽ Sports / Wasanni",
+
+education:"📚 Ilimi / Education",
+
+history:"📜 Tarihi / History",
+
+lifestyle:"🌍 Rayuwa / Lifestyle",
+
+technology:"💻 Fasaha / Technology",
+
+business:"💼 Business / Kasuwanci",
+
+opinion:"💭 Opinion / Ra'ayi"
+
+};
+
+return labels[category] ||
+category ||
+"Article";
+
+}
+
+
 /* =========================
    LOAD ARTICLE
 ========================= */
@@ -309,12 +436,14 @@ async function loadArticle(){
 
 try{
 
-const result=await sb
+const result =
+await sb
 .from("articles")
 .select("*")
 .eq("id",id)
 .eq("status","published")
 .single();
+
 
 if(result.error){
 
@@ -323,7 +452,7 @@ console.error(
 result.error
 );
 
-state.innerHTML=
+state.innerHTML =
 "<h2>Unable to load article</h2>"+
 "<p>The article could not be loaded from the database.</p>";
 
@@ -331,9 +460,10 @@ return;
 
 }
 
+
 if(!result.data){
 
-state.innerHTML=
+state.innerHTML =
 "<h2>Article not found</h2>"+
 "<p>This article is not available.</p>";
 
@@ -341,15 +471,21 @@ return;
 
 }
 
-const a=result.data;
 
-/* SEO */
+const a =
+result.data;
 
-document.title=
-(a.title||"Article")+
+
+/* =========================
+   SEO
+========================= */
+
+document.title =
+(a.title || "Article")+
 " | Hamza S.S Kardam Writes";
 
-const description=
+
+const description =
 String(
 a.excerpt ||
 a.content ||
@@ -358,85 +494,176 @@ a.content ||
 .replace(/\s+/g," ")
 .substring(0,155);
 
-const metaDescription=
+
+const metaDescription =
 document.querySelector(
 'meta[name="description"]'
 );
 
+
 if(metaDescription){
 
-metaDescription.content=
+metaDescription.content =
 description;
 
 }
 
-/* ARTICLE HTML */
 
-state.innerHTML=
+/* =========================
+   ARTICLE IMAGE
+========================= */
+
+let imageHTML = "";
+
+
+if(a.image_url){
+
+imageHTML =
+
+'<img '+
+'class="articleHero" '+
+'src="'+
+esc(a.image_url)+
+'" '+
+'alt="'+
+esc(a.title || "Article")+
+'" '+
+'loading="eager" '+
+'onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';">'+
+
+'<div '+
+'class="articleImageFallback" '+
+'style="display:none">'+
+
+esc(
+String(
+a.category_slug ||
+"ARTICLE"
+).toUpperCase()
+)+
+
+"</div>";
+
+}
+
+
+/* =========================
+   ARTICLE HTML
+========================= */
+
+state.innerHTML =
 
 '<div class="articleMeta">'+
-esc(a.category_slug||"Article")+
+
+esc(
+categoryLabel(
+String(
+a.category_slug || ""
+).toLowerCase()
+)
+)+
+
 " · "+
+
 formatDate(a.created_at)+
+
 "</div>"+
 
+
 "<h1>"+
-esc(a.title||"Untitled Article")+
+esc(
+a.title ||
+"Untitled Article"
+)+
 "</h1>"+
 
-(
-a.image_url
-?
-'<img class="articleHero" src="'+
-esc(a.image_url)+
-'" alt="'+
-esc(a.title||"Article")+
-'" loading="eager">'
-:
-""
-)+
+
+imageHTML+
+
 
 (
 a.excerpt
 ?
+
 '<p class="articleExcerpt">'+
 esc(a.excerpt)+
 "</p>"
+
 :
+
+""
+
+)+
+
+
+'<div class="articleContent">'+
+
+esc(
+a.content ||
 ""
 )+
 
-'<div class="articleContent">'+
-esc(a.content||"")+
 "</div>"+
 
-'<p class="articleMeta">'+
-"Views: <span id=\"views\">"+
-esc(a.views||0)+
-"</span>"+
-"</p>";
 
-/* VIEW COUNTER */
+'<div class="articleStats">'+
+
+'<div class="articleStat">'+
+
+"👁️ Views: <b id=\"views\">"+
+esc(a.views || 0)+
+"</b>"+
+
+"</div>"+
+
+
+'<div class="articleStat">'+
+
+"💬 Comments: <b id=\"commentCount\">0</b>"+
+
+"</div>"+
+
+"</div>";
+
+
+/* =========================
+   INCREMENT VIEW
+========================= */
 
 try{
 
-const view=await sb.rpc(
+const viewResult =
+await sb.rpc(
 "increment_article_view",
 {
 article_id:Number(id)
 }
 );
 
+
+if(viewResult.error){
+
+console.warn(
+"View counter error:",
+viewResult.error
+);
+
+}else{
+
+const viewElement =
+document.getElementById("views");
+
+
 if(
-!view.error &&
-view.data!==null &&
-document.getElementById("views")
+viewElement &&
+viewResult.data !== null &&
+viewResult.data !== undefined
 ){
 
-document.getElementById(
-"views"
-).textContent=
-view.data;
+viewElement.textContent =
+viewResult.data;
+
+}
 
 }
 
@@ -449,7 +676,10 @@ viewError
 
 }
 
-/* COMMENTS */
+
+/* =========================
+   COMMENTS
+========================= */
 
 await renderComments(
 sb,
@@ -463,7 +693,7 @@ console.error(
 error
 );
 
-state.innerHTML=
+state.innerHTML =
 "<h2>Unable to load article</h2>"+
 "<p>Please try again later.</p>";
 
@@ -471,8 +701,9 @@ state.innerHTML=
 
 }
 
+
 /* =========================
-   COMMENTS
+   COMMENTS SYSTEM
 ========================= */
 
 async function renderComments(
@@ -480,24 +711,37 @@ sb,
 articleId
 ){
 
-const box=
+const box =
 document.createElement("section");
 
-box.className="comments";
 
-box.innerHTML=
+box.className =
+"comments";
+
+
+box.innerHTML =
 
 '<h2>💬 Comments / Ra’ayoyi</h2>'+
 
+
 '<p class="commentIntro">'+
+
 "Ka bar ra’ayinka a kasa. "+
+
 "Comments masu amfani suna taimaka wajen gina al’umma."
+
 +"</p>"+
 
-'<form class="commentForm" id="commentForm">'+
+
+'<form '+
+'class="commentForm" '+
+'id="commentForm">'+
+
 
 '<label>'+
+
 "Name"+
+
 '<input '+
 'id="commentName" '+
 'type="text" '+
@@ -506,94 +750,143 @@ box.innerHTML=
 'required '+
 'autocomplete="name" '+
 'placeholder="Your name">'+
-'</label>'+
+
+"</label>"+
+
 
 '<label>'+
+
 "Email (optional)"+
+
 '<input '+
 'id="commentEmail" '+
 'type="email" '+
 'maxlength="120" '+
 'autocomplete="email" '+
 'placeholder="Your email (optional)">'+
-'</label>'+
+
+"</label>"+
+
 
 '<label>'+
+
 "Comment / Ra’ayi"+
+
 '<textarea '+
 'id="commentText" '+
 'maxlength="1000" '+
 'minlength="2" '+
 'required '+
 'placeholder="Rubuta ra’ayinka a nan...">'+
-'</textarea>'+
-'</label>'+
+
+"</textarea>"+
+
+"</label>"+
+
 
 '<label class="honeypot" aria-hidden="true">'+
+
 "Website"+
+
 '<input '+
 'id="website" '+
 'tabindex="-1" '+
 'autocomplete="off">'+
-'</label>'+
 
-'<button type="submit" id="commentButton">'+
+"</label>"+
+
+
+'<button '+
+'type="submit" '+
+'id="commentButton">'+
+
 "Post Comment"+
+
 "</button>"+
 
-'<div class="commentStatus" id="commentStatus"></div>'+
+
+'<div '+
+'class="commentStatus" '+
+'id="commentStatus">'+
+
+"</div>"+
 
 "</form>"+
 
-'<div class="commentList" id="commentList">'+
+
+'<div '+
+'class="commentList" '+
+'id="commentList">'+
+
 '<div class="emptyComments">'+
+
 "Loading comments..."+
+
 "</div>"+
+
 "</div>";
+
 
 state.appendChild(box);
 
-/* ELEMENTS */
 
-const form=
+/* =========================
+   ELEMENTS
+========================= */
+
+const form =
 document.getElementById(
 "commentForm"
 );
 
-const nameInput=
+
+const nameInput =
 document.getElementById(
 "commentName"
 );
 
-const emailInput=
+
+const emailInput =
 document.getElementById(
 "commentEmail"
 );
 
-const textInput=
+
+const textInput =
 document.getElementById(
 "commentText"
 );
 
-const spamInput=
+
+const spamInput =
 document.getElementById(
 "website"
 );
 
-const button=
+
+const button =
 document.getElementById(
 "commentButton"
 );
 
-const status=
+
+const status =
 document.getElementById(
 "commentStatus"
 );
 
-const list=
+
+const list =
 document.getElementById(
 "commentList"
 );
+
+
+const countElement =
+document.getElementById(
+"commentCount"
+);
+
 
 /* =========================
    LOAD APPROVED COMMENTS
@@ -601,14 +894,16 @@ document.getElementById(
 
 async function loadComments(){
 
-list.innerHTML=
+list.innerHTML =
 '<div class="emptyComments">'+
 "Loading comments..."+
 "</div>";
 
+
 try{
 
-const result=await sb
+const result =
+await sb
 .from("comments")
 .select(
 "id,article_id,name,email,body,status,created_at"
@@ -622,6 +917,7 @@ ascending:false
 }
 );
 
+
 if(result.error){
 
 console.error(
@@ -629,30 +925,54 @@ console.error(
 result.error
 );
 
-list.innerHTML=
+list.innerHTML =
 '<div class="commentError">'+
 "Comments ba su samu connection da database ba a yanzu."+
 "</div>";
 
+if(countElement){
+
+countElement.textContent =
+"0";
+
+}
+
 return;
 
 }
 
-const comments=
-result.data||[];
+
+const comments =
+result.data || [];
+
+
+/* COMMENT COUNT */
+
+if(countElement){
+
+countElement.textContent =
+comments.length;
+
+}
+
 
 if(!comments.length){
 
-list.innerHTML=
+list.innerHTML =
 '<div class="emptyComments">'+
+
 "No approved comments yet. Be the first to comment!"+
+
 "</div>";
 
 return;
 
 }
 
-list.innerHTML=
+
+/* RENDER COMMENTS */
+
+list.innerHTML =
 comments.map(function(c){
 
 return (
@@ -660,7 +980,10 @@ return (
 '<article class="commentItem">'+
 
 "<strong>"+
-esc(c.name||"Anonymous")+
+esc(
+c.name ||
+"Anonymous"
+)+
 "</strong>"+
 
 '<div class="commentDate">'+
@@ -668,7 +991,10 @@ formatDate(c.created_at)+
 "</div>"+
 
 '<div class="commentText">'+
-esc(c.body||"")+
+esc(
+c.body ||
+""
+)+
 "</div>"+
 
 "</article>"
@@ -677,6 +1003,7 @@ esc(c.body||"")+
 
 }).join("");
 
+
 }catch(error){
 
 console.error(
@@ -684,7 +1011,7 @@ console.error(
 error
 );
 
-list.innerHTML=
+list.innerHTML =
 '<div class="commentError">'+
 "Unable to load comments right now."+
 "</div>";
@@ -692,6 +1019,7 @@ list.innerHTML=
 }
 
 }
+
 
 /* =========================
    POST COMMENT
@@ -703,123 +1031,148 @@ async function(e){
 
 e.preventDefault();
 
-status.textContent="";
-status.style.color="";
 
-const name=
+status.textContent =
+"";
+
+status.style.color =
+"";
+
+
+const name =
 nameInput.value.trim();
 
-const email=
+
+const email =
 emailInput.value.trim();
 
-const body=
+
+const body =
 textInput.value.trim();
+
 
 /* HONEYPOT */
 
 if(
-spamInput.value.trim()!==""
+spamInput.value.trim() !== ""
 ){
 
-status.textContent=
+status.textContent =
 "Comment could not be submitted.";
 
 return;
 
 }
 
-/* NAME VALIDATION */
 
-if(name.length<2){
+/* NAME */
 
-status.textContent=
+if(name.length < 2){
+
+status.textContent =
 "Please enter your name.";
 
 return;
 
 }
 
-if(name.length>60){
 
-status.textContent=
+if(name.length > 60){
+
+status.textContent =
 "Name is too long.";
 
 return;
 
 }
 
-/* EMAIL VALIDATION */
 
-if(email.length>120){
+/* EMAIL */
 
-status.textContent=
+if(email.length > 120){
+
+status.textContent =
 "Email is too long.";
 
 return;
 
 }
 
+
 if(
 email &&
 !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
 ){
 
-status.textContent=
+status.textContent =
 "Please enter a valid email.";
 
 return;
 
 }
 
-/* COMMENT VALIDATION */
 
-if(body.length<2){
+/* COMMENT */
 
-status.textContent=
+if(body.length < 2){
+
+status.textContent =
 "Please write a comment.";
 
 return;
 
 }
 
-if(body.length>1000){
 
-status.textContent=
+if(body.length > 1000){
+
+status.textContent =
 "Comment is too long.";
 
 return;
 
 }
 
+
 /* BUTTON */
 
-button.disabled=true;
+button.disabled =
+true;
 
-button.textContent=
+button.textContent =
 "Posting...";
 
-status.textContent=
+
+status.textContent =
 "Submitting your comment...";
+
 
 /* INSERT */
 
 try{
 
-const result=await sb
+const result =
+await sb
 .from("comments")
 .insert({
 
-article_id:articleId,
+article_id:
+articleId,
 
-name:name,
+name:
+name,
 
-email:email || null,
+email:
+email || null,
 
-body:body,
+body:
+body,
 
-status:"pending"
+status:
+"pending"
 
 });
+
 
 if(result.error){
 
@@ -828,26 +1181,31 @@ console.error(
 result.error
 );
 
-status.textContent=
+status.textContent =
 "An samu matsala wajen posting comment. Please try again.";
 
 return;
 
 }
 
+
 /* SUCCESS */
 
 form.reset();
 
-status.textContent=
+
+status.textContent =
 "✅ Comment submitted successfully. It will appear after approval.";
 
-status.style.color=
+
+status.style.color =
 "#16803c";
 
-/* Reload approved comments */
+
+/* Reload */
 
 await loadComments();
+
 
 }catch(error){
 
@@ -856,27 +1214,32 @@ console.error(
 error
 );
 
-status.textContent=
+status.textContent =
 "Unable to post comment right now.";
 
 }finally{
 
-button.disabled=false;
+button.disabled =
+false;
 
-button.textContent=
+button.textContent =
 "Post Comment";
 
 }
 
 });
 
-/* INITIAL LOAD */
+
+/* INITIAL COMMENTS */
 
 await loadComments();
 
 }
 
-/* START */
+
+/* =========================
+   START
+========================= */
 
 loadArticle();
 
