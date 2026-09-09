@@ -9,43 +9,210 @@
 <link rel="stylesheet" href="hamza_kardam_writes_website/style.css">
 
 <style>
-body{background:#f5f6f8}
-.wrap{width:min(1100px,94%);margin:25px auto}
-.top{display:flex;justify-content:space-between;align-items:center;gap:15px}
-.top h1{font:700 38px 'Playfair Display',serif}
-.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
-.stat,.panel{background:#fff;border:1px solid #e4e6eb;border-radius:12px;padding:18px;margin-top:15px}
-.stat small{display:block;color:#687386;font-size:10px}
-.stat b{font-size:26px}
-.actions{display:flex;flex-wrap:wrap;gap:10px}
-.action,.btn2{padding:11px 14px;border:0;border-radius:7px;background:#0b1730;color:#fff;font-size:12px;font-weight:700;cursor:pointer}
-.gold{background:#d7aa55;color:#0b1730}
-.danger{background:#a33;color:#fff}
-.blue{background:#1d5fa7;color:#fff}
-.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.formgrid .full{grid-column:1/-1}
-.field label{display:block;font-size:10px;font-weight:800;margin:0 0 5px}
-.field input,.field textarea,.field select{width:100%;box-sizing:border-box;padding:11px;border:1px solid #ddd;border-radius:7px;font:inherit}
-.field textarea{min-height:130px}
-.tablewrap{overflow:auto}
-table{width:100%;border-collapse:collapse;font-size:12px}
-th,td{padding:10px;border-bottom:1px solid #eee;text-align:left;white-space:nowrap}
-.notice{padding:12px;background:#fff7df;border-left:3px solid #d7aa55;font-size:11px}
-.msg{margin-top:10px;padding:10px;display:none;font-size:12px;border-radius:7px}
-.row-actions button{margin-right:5px}
-.section-title{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.video-thumb{width:70px;height:42px;object-fit:cover;border-radius:6px;background:#eee}
-.hidden{display:none!important}
+body{
+  background:#f5f6f8;
+}
+
+.wrap{
+  width:min(1100px,94%);
+  margin:25px auto;
+}
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+}
+
+.top h1{
+  font:700 38px 'Playfair Display',serif;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:12px;
+}
+
+.stat,
+.panel{
+  background:#fff;
+  border:1px solid #e4e6eb;
+  border-radius:12px;
+  padding:18px;
+  margin-top:15px;
+}
+
+.stat small{
+  display:block;
+  color:#687386;
+  font-size:10px;
+}
+
+.stat b{
+  font-size:26px;
+}
+
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.action,
+.btn2{
+  padding:11px 14px;
+  border:0;
+  border-radius:7px;
+  background:#0b1730;
+  color:#fff;
+  font-size:12px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.gold{
+  background:#d7aa55;
+  color:#0b1730;
+}
+
+.danger{
+  background:#a33;
+  color:#fff;
+}
+
+.blue{
+  background:#1d5fa7;
+  color:#fff;
+}
+
+.formgrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.formgrid .full{
+  grid-column:1/-1;
+}
+
+.field label{
+  display:block;
+  font-size:10px;
+  font-weight:800;
+  margin:0 0 5px;
+}
+
+.field input,
+.field textarea,
+.field select{
+  width:100%;
+  box-sizing:border-box;
+  padding:11px;
+  border:1px solid #ddd;
+  border-radius:7px;
+  font:inherit;
+}
+
+.field textarea{
+  min-height:130px;
+}
+
+.tablewrap{
+  overflow:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:12px;
+}
+
+th,
+td{
+  padding:10px;
+  border-bottom:1px solid #eee;
+  text-align:left;
+  white-space:nowrap;
+}
+
+.notice{
+  padding:12px;
+  background:#fff7df;
+  border-left:3px solid #d7aa55;
+  font-size:11px;
+}
+
+.msg{
+  margin-top:10px;
+  padding:10px;
+  display:none;
+  font-size:12px;
+  border-radius:7px;
+}
+
+.row-actions button{
+  margin-right:5px;
+}
+
+.section-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.video-thumb{
+  width:70px;
+  height:42px;
+  object-fit:cover;
+  border-radius:6px;
+  background:#eee;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.success{
+  background:#e9f8ee;
+  color:#146b35;
+  border-left:3px solid #2e9d57;
+}
+
+.error{
+  background:#fff0f0;
+  color:#9b2226;
+  border-left:3px solid #a33;
+}
 
 @media(max-width:850px){
-.stats{grid-template-columns:repeat(2,1fr)}
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
 }
 
 @media(max-width:650px){
-.stats{grid-template-columns:1fr 1fr}
-.top{display:block}
-.formgrid{grid-template-columns:1fr}
-.formgrid .full{grid-column:auto}
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .top{
+    display:block;
+  }
+
+  .formgrid{
+    grid-template-columns:1fr;
+  }
+
+  .formgrid .full{
+    grid-column:auto;
+  }
+
 }
 </style>
 </head>
@@ -72,13 +239,18 @@ Log out
 
 </div>
 
+
 <div id="guard" class="panel">
 Checking secure session…
 </div>
 
+
 <div id="app" class="hidden">
 
-<!-- STATS -->
+
+<!-- =========================
+     STATS
+========================= -->
 
 <div class="stats">
 
@@ -109,7 +281,10 @@ Checking secure session…
 
 </div>
 
-<!-- ACTIONS -->
+
+<!-- =========================
+     ACTIONS
+========================= -->
 
 <div class="panel">
 
@@ -133,11 +308,16 @@ Refresh
 
 </div>
 
-<!-- ARTICLE EDITOR -->
+
+<!-- =========================
+     ARTICLE EDITOR
+========================= -->
 
 <div class="panel hidden" id="editor">
 
-<h2 id="editorTitle">New Article</h2>
+<h2 id="editorTitle">
+New Article
+</h2>
 
 <form id="articleForm">
 
@@ -146,67 +326,122 @@ Refresh
 <div class="formgrid">
 
 <div class="field full">
+
 <label>TITLE</label>
-<input id="title" required>
+
+<input
+id="title"
+required>
+
 </div>
 
+
 <div class="field">
+
 <label>SLUG</label>
-<input id="slug" required>
+
+<input
+id="slug"
+required>
+
 </div>
 
-<div class="field">
-<label>CATEGORY</label>
 
-<!-- 9 WEBSITE CATEGORIES -->
+<div class="field">
+
+<label>CATEGORY</label>
 
 <select id="category" required>
 
-<option value="news">📰 News / Labarai</option>
+<option value="news">
+📰 News / Labarai
+</option>
 
-<option value="politics">🏛️ Politics / Siyasa</option>
+<option value="politics">
+🏛️ Politics / Siyasa
+</option>
 
-<option value="sports">⚽ Sports / Wasanni</option>
+<option value="sports">
+⚽ Sports / Wasanni
+</option>
 
-<option value="education">📚 Ilimi / Education</option>
+<option value="education">
+📚 Ilimi / Education
+</option>
 
-<option value="history">📜 Tarihi / History</option>
+<option value="history">
+📜 Tarihi / History
+</option>
 
-<option value="lifestyle">🌍 Rayuwa / Lifestyle</option>
+<option value="lifestyle">
+🌍 Rayuwa / Lifestyle
+</option>
 
-<option value="technology">💻 Fasaha / Technology</option>
+<option value="technology">
+💻 Fasaha / Technology
+</option>
 
-<option value="business">💼 Business / Kasuwanci</option>
+<option value="business">
+💼 Business / Kasuwanci
+</option>
 
-<option value="opinion">💭 Opinion / Ra'ayi</option>
+<option value="opinion">
+💭 Opinion / Ra'ayi
+</option>
 
 </select>
 
 </div>
 
+
 <div class="field full">
+
 <label>EXCERPT</label>
-<textarea id="excerpt" style="min-height:80px"></textarea>
+
+<textarea
+id="excerpt"
+style="min-height:80px">
+</textarea>
+
 </div>
+
 
 <div class="field full">
+
 <label>CONTENT</label>
-<textarea id="content" required></textarea>
+
+<textarea
+id="content"
+required>
+</textarea>
+
 </div>
 
+
 <div class="field">
+
 <label>IMAGE URL (optional)</label>
-<input id="imageUrl" placeholder="https://...">
+
+<input
+id="imageUrl"
+placeholder="https://...">
+
 </div>
 
+
 <div class="field">
+
 <label>STATUS</label>
 
 <select id="status">
 
-<option value="draft">Draft</option>
+<option value="draft">
+Draft
+</option>
 
-<option value="published">Published</option>
+<option value="published">
+Published
+</option>
 
 </select>
 
@@ -214,13 +449,20 @@ Refresh
 
 </div>
 
-<div class="actions" style="margin-top:12px">
 
-<button class="action gold">
+<div
+class="actions"
+style="margin-top:12px">
+
+<button
+class="action gold">
 Save Article
 </button>
 
-<button type="button" class="action" id="cancelBtn">
+<button
+type="button"
+class="action"
+id="cancelBtn">
 Cancel
 </button>
 
@@ -230,17 +472,27 @@ Cancel
 
 </div>
 
-<!-- VIDEO EDITOR -->
 
-<div class="panel hidden" id="videoEditor">
+<!-- =========================
+     VIDEO EDITOR
+========================= -->
 
-<h2 id="videoEditorTitle">Add Video</h2>
+<div
+class="panel hidden"
+id="videoEditor">
+
+<h2 id="videoEditorTitle">
+Add Video
+</h2>
 
 <form id="videoForm">
 
-<input type="hidden" id="videoId">
+<input
+type="hidden"
+id="videoId">
 
 <div class="formgrid">
+
 
 <div class="field full">
 
@@ -253,6 +505,7 @@ required>
 
 </div>
 
+
 <div class="field full">
 
 <label>VIDEO URL</label>
@@ -264,15 +517,18 @@ required>
 
 </div>
 
+
 <div class="field full">
 
 <label>DESCRIPTION</label>
 
 <textarea
 id="videoDescription"
-placeholder="Short description about the video..."></textarea>
+placeholder="Short description about the video...">
+</textarea>
 
 </div>
+
 
 <div class="field">
 
@@ -284,35 +540,57 @@ placeholder="https://...">
 
 </div>
 
+
 <div class="field">
 
 <label>CATEGORY</label>
 
 <select id="videoCategory">
 
-<option value="news">News / Labarai</option>
+<option value="news">
+News / Labarai
+</option>
 
-<option value="politics">Politics / Siyasa</option>
+<option value="politics">
+Politics / Siyasa
+</option>
 
-<option value="sports">Sports / Wasanni</option>
+<option value="sports">
+Sports / Wasanni
+</option>
 
-<option value="technology">Technology / Fasaha</option>
+<option value="technology">
+Technology / Fasaha
+</option>
 
-<option value="education">Education / Ilimi</option>
+<option value="education">
+Education / Ilimi
+</option>
 
-<option value="history">History / Tarihi</option>
+<option value="history">
+History / Tarihi
+</option>
 
-<option value="lifestyle">Lifestyle / Rayuwa</option>
+<option value="lifestyle">
+Lifestyle / Rayuwa
+</option>
 
-<option value="business">Business / Kasuwanci</option>
+<option value="business">
+Business / Kasuwanci
+</option>
 
-<option value="opinion">Opinion / Ra'ayi</option>
+<option value="opinion">
+Opinion / Ra'ayi
+</option>
 
-<option value="interviews">Interviews / Hirarraki</option>
+<option value="interviews">
+Interviews / Hirarraki
+</option>
 
 </select>
 
 </div>
+
 
 <div class="field">
 
@@ -320,9 +598,13 @@ placeholder="https://...">
 
 <select id="videoStatus">
 
-<option value="draft">Draft</option>
+<option value="draft">
+Draft
+</option>
 
-<option value="published">Published</option>
+<option value="published">
+Published
+</option>
 
 </select>
 
@@ -330,13 +612,20 @@ placeholder="https://...">
 
 </div>
 
-<div class="actions" style="margin-top:12px">
 
-<button class="action gold">
+<div
+class="actions"
+style="margin-top:12px">
+
+<button
+class="action gold">
 Save Video
 </button>
 
-<button type="button" class="action" id="cancelVideoBtn">
+<button
+type="button"
+class="action"
+id="cancelVideoBtn">
 Cancel
 </button>
 
@@ -346,15 +635,21 @@ Cancel
 
 </div>
 
-<!-- ARTICLES -->
+
+<!-- =========================
+     ARTICLES
+========================= -->
 
 <div class="panel">
 
 <div class="section-title">
 
-<h2>Articles</h2>
+<h2>
+Articles
+</h2>
 
 </div>
+
 
 <div class="tablewrap">
 
@@ -386,26 +681,38 @@ Cancel
 
 </div>
 
-<!-- VIDEOS -->
+
+<!-- =========================
+     VIDEOS
+========================= -->
 
 <div class="panel">
 
 <div class="section-title">
 
-<h2>🎥 Videos</h2>
+<h2>
+🎥 Videos
+</h2>
 
-<button class="btn2 blue" id="addVideoTopBtn">
+<button
+class="btn2 blue"
+id="addVideoTopBtn">
 ＋ Add Video
 </button>
 
 </div>
 
-<p style="font-size:12px;color:#687386">
 
-Ka saka video daga nan. Idan ka zaɓi
-<b>Published</b>, zai bayyana a Videos page.
+<p
+style="font-size:12px;color:#687386">
+
+Ka saka video daga nan.
+Idan ka zaɓi
+<b>Published</b>,
+zai bayyana a Videos page.
 
 </p>
+
 
 <div class="tablewrap">
 
@@ -439,7 +746,10 @@ Ka saka video daga nan. Idan ka zaɓi
 
 </div>
 
-<!-- SECURITY -->
+
+<!-- =========================
+     SECURITY
+========================= -->
 
 <div class="panel">
 
@@ -460,36 +770,77 @@ protected by Row Level Security.
 </div>
 </div>
 
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script src="supabase-config.js"></script>
 
 <script src="supabase-client.js"></script>
 
+
 <script>
 
+/* =========================================
+   GLOBAL VARIABLES
+========================================= */
+
 let sb = null;
+
 let user = null;
+
 let articles = [];
+
 let videos = [];
 
-const $ = id => document.getElementById(id);
 
-function show(message){
+/* =========================================
+   HELPER
+========================================= */
 
-$('msg').textContent = message;
+const $ = id =>
+document.getElementById(id);
 
-$('msg').style.display = 'block';
+
+/* =========================================
+   MESSAGE
+========================================= */
+
+function show(message,type='error'){
+
+const box = $('msg');
+
+box.textContent = message;
+
+box.className =
+'msg ' + type;
+
+box.style.display =
+'block';
 
 }
+
 
 function hide(){
 
-$('msg').style.display = 'none';
+const box = $('msg');
+
+box.style.display =
+'none';
+
+box.className =
+'msg';
+
+box.textContent =
+'';
 
 }
 
-function esc(value = ''){
+
+/* =========================================
+   ESCAPE HTML
+========================================= */
+
+function esc(value=''){
 
 return String(value).replace(
 /[&<>'"]/g,
@@ -504,43 +855,57 @@ m => ({
 
 }
 
-/* =========================
+
+/* =========================================
    CATEGORY LABELS
-========================= */
+========================================= */
 
 function categoryLabel(category){
 
 const labels = {
 
-news:'📰 News / Labarai',
+news:
+'📰 News / Labarai',
 
-politics:'🏛️ Politics / Siyasa',
+politics:
+'🏛️ Politics / Siyasa',
 
-sports:'⚽ Sports / Wasanni',
+sports:
+'⚽ Sports / Wasanni',
 
-education:'📚 Ilimi / Education',
+education:
+'📚 Ilimi / Education',
 
-history:'📜 Tarihi / History',
+history:
+'📜 Tarihi / History',
 
-lifestyle:'🌍 Rayuwa / Lifestyle',
+lifestyle:
+'🌍 Rayuwa / Lifestyle',
 
-technology:'💻 Fasaha / Technology',
+technology:
+'💻 Fasaha / Technology',
 
-business:'💼 Business / Kasuwanci',
+business:
+'💼 Business / Kasuwanci',
 
-opinion:'💭 Opinion / Ra\'ayi',
+opinion:
+'💭 Opinion / Ra\'ayi',
 
-interviews:'🎤 Interviews / Hirarraki'
+interviews:
+'🎤 Interviews / Hirarraki'
 
 };
 
-return labels[category] || category || 'Article';
+return labels[category]
+|| category
+|| 'Article';
 
 }
 
-/* =========================
+
+/* =========================================
    INITIALIZE
-========================= */
+========================================= */
 
 async function init(){
 
@@ -555,22 +920,25 @@ return;
 
 }
 
-sb = window.kardamSupabase;
+sb =
+window.kardamSupabase;
 
-/*
-IMPORTANT:
-Use getSession first so the browser
-can restore the login session.
-*/
+
+/* Restore login session */
 
 const {
-data: sessionData,
-error: sessionError
-} = await sb.auth.getSession();
+data:sessionData,
+error:sessionError
+} =
+await sb.auth.getSession();
+
 
 if(sessionError){
 
-console.error(sessionError);
+console.error(
+'Session error:',
+sessionError
+);
 
 $('guard').textContent =
 'Unable to check secure session.';
@@ -579,80 +947,115 @@ return;
 
 }
 
+
 if(!sessionData.session){
 
-location.replace('admin-login.html');
+location.replace(
+'admin-login.html'
+);
 
 return;
 
 }
 
-user = sessionData.session.user;
+
+user =
+sessionData.session.user;
+
 
 /* Verify user */
 
 const {
-data: userData,
-error: userError
-} = await sb.auth.getUser();
+data:userData,
+error:userError
+} =
+await sb.auth.getUser();
 
-if(userError || !userData.user){
 
-location.replace('admin-login.html');
+if(
+userError ||
+!userData.user
+){
+
+location.replace(
+'admin-login.html'
+);
 
 return;
 
 }
 
-user = userData.user;
 
-/* Check admin/editor role */
+user =
+userData.user;
+
+
+/* Check role */
 
 const {
-data: profile,
-error: profileError
-} = await sb
+data:profile,
+error:profileError
+} =
+await sb
 .from('profiles')
 .select('role')
-.eq('id', user.id)
+.eq('id',user.id)
 .single();
+
 
 if(
 profileError ||
 !profile ||
-!['admin','editor'].includes(profile.role)
+!['admin','editor']
+.includes(profile.role)
 ){
 
 await sb.auth.signOut();
 
-location.replace('admin-login.html');
+location.replace(
+'admin-login.html'
+);
 
 return;
 
 }
 
+
 /* Open dashboard */
 
-$('guard').classList.add('hidden');
+$('guard')
+.classList
+.add('hidden');
 
-$('app').classList.remove('hidden');
+$('app')
+.classList
+.remove('hidden');
+
+
+/* Load dashboard */
 
 await load();
 
+
 }catch(error){
 
-console.error(error);
+console.error(
+'Dashboard init error:',
+error
+);
 
 $('guard').textContent =
-'Dashboard error: ' + error.message;
+'Dashboard error: ' +
+error.message;
 
 }
 
 }
 
-/* =========================
-   LOAD DATA
-========================= */
+
+/* =========================================
+   LOAD DASHBOARD
+========================================= */
 
 async function load(){
 
@@ -660,39 +1063,42 @@ try{
 
 hide();
 
-const [
 
-articleResult,
+/* =========================================
+   ARTICLES
+========================================= */
 
-commentResult,
-
-adResult,
-
-videoResult
-
-] = await Promise.all([
-
-sb
+const articleResult =
+await sb
 .from('articles')
-.select('*')
-.order('created_at',{ascending:false}),
+.select(`
+id,
+title,
+slug,
+excerpt,
+content,
+category_slug,
+image_url,
+status,
+views,
+author_id,
+created_at,
+updated_at
+`)
+.order(
+'created_at',
+{
+ascending:false
+}
+);
 
-sb
-.from('comments')
-.select('id',{count:'exact',head:true}),
-
-sb
-.from('ads')
-.select('id',{count:'exact',head:true}),
-
-sb
-.from('videos')
-.select('*')
-.order('created_at',{ascending:false})
-
-]);
 
 if(articleResult.error){
+
+console.error(
+'Articles error:',
+articleResult.error
+);
 
 show(
 'Articles error: ' +
@@ -703,74 +1109,292 @@ return;
 
 }
 
-if(videoResult.error){
-
-show(
-'Videos error: ' +
-videoResult.error.message
-);
-
-return;
-
-}
 
 articles =
 articleResult.data || [];
 
+
+/* =========================================
+   TOTAL ARTICLE VIEWS
+========================================= */
+
+let totalViews = 0;
+
+
+articles.forEach(
+article => {
+
+const value =
+Number(article.views);
+
+
+if(
+Number.isFinite(value)
+){
+
+totalViews += value;
+
+}
+
+});
+
+
+$('articleCount')
+.textContent =
+articles.length
+.toLocaleString();
+
+
+$('viewCount')
+.textContent =
+totalViews
+.toLocaleString();
+
+
+/* =========================================
+   COMMENTS
+========================================= */
+
+try{
+
+const commentResult =
+await sb
+.from('comments')
+.select(
+'id',
+{
+count:'exact',
+head:true
+}
+);
+
+
+if(commentResult.error){
+
+console.warn(
+'Comments count unavailable:',
+commentResult.error
+);
+
+$('commentCount')
+.textContent =
+'—';
+
+}else{
+
+$('commentCount')
+.textContent =
+Number(
+commentResult.count || 0
+)
+.toLocaleString();
+
+}
+
+}catch(error){
+
+console.warn(
+'Comments count exception:',
+error
+);
+
+$('commentCount')
+.textContent =
+'—';
+
+}
+
+
+/* =========================================
+   ADS
+========================================= */
+
+try{
+
+const adResult =
+await sb
+.from('ads')
+.select(
+'id',
+{
+count:'exact',
+head:true
+}
+);
+
+
+if(adResult.error){
+
+console.warn(
+'Ads count unavailable:',
+adResult.error
+);
+
+$('adCount')
+.textContent =
+'—';
+
+}else{
+
+$('adCount')
+.textContent =
+Number(
+adResult.count || 0
+)
+.toLocaleString();
+
+}
+
+}catch(error){
+
+console.warn(
+'Ads count exception:',
+error
+);
+
+$('adCount')
+.textContent =
+'—';
+
+}
+
+
+/* =========================================
+   VIDEOS
+========================================= */
+
+try{
+
+const videoResult =
+await sb
+.from('videos')
+.select(`
+id,
+title,
+description,
+video_url,
+thumbnail_url,
+category_slug,
+status,
+author_id,
+views,
+created_at,
+updated_at
+`)
+.order(
+'created_at',
+{
+ascending:false
+}
+);
+
+
+if(videoResult.error){
+
+console.warn(
+'Videos error:',
+videoResult.error
+);
+
+videos = [];
+
+$('videoCount')
+.textContent =
+'—';
+
+}else{
+
 videos =
 videoResult.data || [];
 
-$('articleCount').textContent =
-articles.length;
+$('videoCount')
+.textContent =
+videos.length
+.toLocaleString();
 
-$('viewCount').textContent =
-articles.reduce(
-(total,item) =>
-total + Number(item.views || 0),
-0
+}
+
+}catch(error){
+
+console.warn(
+'Videos exception:',
+error
 );
 
-$('commentCount').textContent =
-commentResult.count || 0;
+videos = [];
 
-$('adCount').textContent =
-adResult.count || 0;
+$('videoCount')
+.textContent =
+'—';
 
-$('videoCount').textContent =
-videos.length;
+}
+
+
+/* Render everything */
 
 renderArticles();
 
 renderVideos();
 
+
+console.log(
+'Kardam Writes Dashboard loaded:',
+{
+articles:articles.length,
+totalViews:totalViews,
+videos:videos.length
+}
+);
+
+
 }catch(error){
 
-console.error(error);
+console.error(
+'Dashboard load error:',
+error
+);
 
-show(error.message);
+show(
+'Dashboard error: ' +
+error.message
+);
 
 }
 
 }
 
-/* =========================
-   ARTICLES
-========================= */
+
+/* =========================================
+   RENDER ARTICLES
+========================================= */
 
 function renderArticles(){
 
 if(!articles.length){
 
 $('rows').innerHTML =
-'<tr><td colspan="5">No articles yet.</td></tr>';
+
+'<tr>' +
+'<td colspan="5">' +
+'No articles yet.' +
+'</td>' +
+'</tr>';
 
 return;
 
 }
 
+
 $('rows').innerHTML =
 
-articles.map(article => `
+articles.map(
+article => {
+
+const views =
+Number(article.views);
+
+
+return `
 
 <tr>
 
@@ -779,7 +1403,11 @@ ${esc(article.title)}
 </td>
 
 <td>
-${esc(categoryLabel(article.category_slug))}
+${esc(
+categoryLabel(
+article.category_slug
+)
+)}
 </td>
 
 <td>
@@ -787,7 +1415,13 @@ ${esc(article.status)}
 </td>
 
 <td>
-${Number(article.views || 0)}
+${
+Number.isFinite(views)
+?
+views.toLocaleString()
+:
+'0'
+}
 </td>
 
 <td class="row-actions">
@@ -812,144 +1446,264 @@ Delete
 
 </tr>
 
-`).join('');
+`;
+
+}
+).join('');
 
 }
 
+
+/* =========================================
+   OPEN ARTICLE EDITOR
+========================================= */
+
 function openEditor(article){
 
-$('editor').classList.remove('hidden');
+$('editor')
+.classList
+.remove('hidden');
 
-$('editorTitle').textContent =
-article ? 'Edit Article' : 'New Article';
 
-$('articleId').value =
+$('editorTitle')
+.textContent =
+article
+?
+'Edit Article'
+:
+'New Article';
+
+
+$('articleId')
+.value =
 article?.id || '';
 
-$('title').value =
+
+$('title')
+.value =
 article?.title || '';
 
-$('slug').value =
+
+$('slug')
+.value =
 article?.slug || '';
 
-$('category').value =
+
+$('category')
+.value =
 article?.category_slug || 'news';
 
-$('excerpt').value =
+
+$('excerpt')
+.value =
 article?.excerpt || '';
 
-$('content').value =
+
+$('content')
+.value =
 article?.content || '';
 
-$('imageUrl').value =
+
+$('imageUrl')
+.value =
 article?.image_url || '';
 
-$('status').value =
+
+$('status')
+.value =
 article?.status || 'draft';
 
+
 window.scrollTo({
-
 top:0,
-
 behavior:'smooth'
-
 });
 
 }
 
-window.editArticle = function(id){
+
+/* =========================================
+   EDIT ARTICLE
+========================================= */
+
+window.editArticle =
+function(id){
 
 const article =
-articles.find(item => item.id === id);
+articles.find(
+item =>
+Number(item.id) ===
+Number(id)
+);
 
-openEditor(article);
+if(!article){
 
-};
-
-window.deleteArticle = async function(id){
-
-if(!confirm('Delete this article?')) return;
-
-const {error} =
-await sb
-.from('articles')
-.delete()
-.eq('id',id);
-
-if(error){
-
-show(error.message);
+show(
+'Article not found.'
+);
 
 return;
 
 }
 
+openEditor(article);
+
+};
+
+
+/* =========================================
+   DELETE ARTICLE
+========================================= */
+
+window.deleteArticle =
+async function(id){
+
+if(
+!confirm(
+'Delete this article?'
+)
+){
+
+return;
+
+}
+
+
+const {
+error
+} =
+await sb
+.from('articles')
+.delete()
+.eq('id',id);
+
+
+if(error){
+
+show(
+'Delete failed: ' +
+error.message
+);
+
+return;
+
+}
+
+
+show(
+'Article deleted successfully.',
+'success'
+);
+
+
 await load();
 
 };
 
-$('newBtn').onclick = function(){
+
+/* =========================================
+   NEW ARTICLE
+========================================= */
+
+$('newBtn')
+.onclick =
+function(){
 
 openEditor();
 
 };
 
-$('cancelBtn').onclick = function(){
 
-$('editor').classList.add('hidden');
+/* =========================================
+   CANCEL ARTICLE
+========================================= */
+
+$('cancelBtn')
+.onclick =
+function(){
+
+$('editor')
+.classList
+.add('hidden');
 
 };
 
-/* =========================
-   SAVE ARTICLE
-========================= */
 
-$('articleForm').onsubmit =
+/* =========================================
+   SAVE ARTICLE
+========================================= */
+
+$('articleForm')
+.onsubmit =
 async function(event){
 
 event.preventDefault();
 
 hide();
 
+
 const cleanSlug =
-$('slug').value
+$('slug')
+.value
 .trim()
 .toLowerCase()
-.replace(/[^a-z0-9-]+/g,'-')
-.replace(/^-+|-+$/g,'');
+.replace(
+/[^a-z0-9-]+/g,
+'-'
+)
+.replace(
+/^-+|-+$/g,
+'');
+
 
 const payload = {
 
 title:
-$('title').value.trim(),
+$('title')
+.value
+.trim(),
 
 slug:
 cleanSlug,
 
 category_slug:
-$('category').value,
+$('category')
+.value,
 
 excerpt:
-$('excerpt').value.trim(),
+$('excerpt')
+.value
+.trim(),
 
 content:
-$('content').value.trim(),
+$('content')
+.value
+.trim(),
 
 image_url:
-$('imageUrl').value.trim() || null,
+$('imageUrl')
+.value
+.trim()
+||
+null,
 
 status:
-$('status').value,
+$('status')
+.value,
 
 author_id:
 user.id
 
 };
 
+
 const id =
-$('articleId').value;
+$('articleId')
+.value;
+
 
 let result;
+
 
 if(id){
 
@@ -968,63 +1722,90 @@ await sb
 
 }
 
+
 if(result.error){
 
-show(result.error.message);
+show(
+'Article save failed: ' +
+result.error.message
+);
 
 return;
 
 }
 
-show('Article saved successfully.');
 
-$('editor').classList.add('hidden');
+show(
+'Article saved successfully.',
+'success'
+);
+
+
+$('editor')
+.classList
+.add('hidden');
+
 
 await load();
 
 };
 
-/* =========================
-   VIDEOS
-========================= */
+
+/* =========================================
+   RENDER VIDEOS
+========================================= */
 
 function renderVideos(){
 
 if(!videos.length){
 
 $('videoRows').innerHTML =
-'<tr><td colspan="6">No videos yet.</td></tr>';
+
+'<tr>' +
+'<td colspan="6">' +
+'No videos yet.' +
+'</td>' +
+'</tr>';
 
 return;
 
 }
 
+
 $('videoRows').innerHTML =
 
-videos.map(video => `
+videos.map(
+video => {
+
+const views =
+Number(video.views);
+
+
+const thumbnail =
+video.thumbnail_url
+?
+`
+<img
+class="video-thumb"
+src="${esc(
+video.thumbnail_url
+)}"
+alt=""
+loading="lazy"
+onerror="
+this.style.display='none'
+">
+`
+:
+'—';
+
+
+return `
 
 <tr>
 
 <td>
-
-${
-video.thumbnail_url
-
-?
-
-`<img
-class="video-thumb"
-src="${esc(video.thumbnail_url)}"
-alt=""
-loading="lazy"
-onerror="this.style.display='none'">`
-
-:
-
-'—'
-
-}
-
+${thumbnail}
 </td>
 
 <td>
@@ -1032,7 +1813,11 @@ ${esc(video.title)}
 </td>
 
 <td>
-${esc(categoryLabel(video.category_slug))}
+${esc(
+categoryLabel(
+video.category_slug
+)
+)}
 </td>
 
 <td>
@@ -1040,7 +1825,13 @@ ${esc(video.status)}
 </td>
 
 <td>
-${Number(video.views || 0)}
+${
+Number.isFinite(views)
+?
+views.toLocaleString()
+:
+'0'
+}
 </td>
 
 <td class="row-actions">
@@ -1065,137 +1856,253 @@ Delete
 
 </tr>
 
-`).join('');
+`;
+
+}
+).join('');
 
 }
 
+
+/* =========================================
+   OPEN VIDEO EDITOR
+========================================= */
+
 function openVideoEditor(video){
 
-$('videoEditor').classList.remove('hidden');
+$('videoEditor')
+.classList
+.remove('hidden');
 
-$('videoEditorTitle').textContent =
-video ? 'Edit Video' : 'Add Video';
 
-$('videoId').value =
+$('videoEditorTitle')
+.textContent =
+video
+?
+'Edit Video'
+:
+'Add Video';
+
+
+$('videoId')
+.value =
 video?.id || '';
 
-$('videoTitle').value =
+
+$('videoTitle')
+.value =
 video?.title || '';
 
-$('videoUrl').value =
+
+$('videoUrl')
+.value =
 video?.video_url || '';
 
-$('videoDescription').value =
+
+$('videoDescription')
+.value =
 video?.description || '';
 
-$('videoThumbnail').value =
+
+$('videoThumbnail')
+.value =
 video?.thumbnail_url || '';
 
-$('videoCategory').value =
+
+$('videoCategory')
+.value =
 video?.category_slug || 'news';
 
-$('videoStatus').value =
+
+$('videoStatus')
+.value =
 video?.status || 'draft';
 
+
 window.scrollTo({
-
 top:0,
-
 behavior:'smooth'
-
 });
 
 }
 
-window.editVideo = function(id){
+
+/* =========================================
+   EDIT VIDEO
+========================================= */
+
+window.editVideo =
+function(id){
 
 const video =
-videos.find(item => item.id === id);
+videos.find(
+item =>
+Number(item.id) ===
+Number(id)
+);
 
-openVideoEditor(video);
+if(!video){
 
-};
-
-window.deleteVideo = async function(id){
-
-if(!confirm('Delete this video?')) return;
-
-const {error} =
-await sb
-.from('videos')
-.delete()
-.eq('id',id);
-
-if(error){
-
-show(error.message);
+show(
+'Video not found.'
+);
 
 return;
 
 }
 
+openVideoEditor(video);
+
+};
+
+
+/* =========================================
+   DELETE VIDEO
+========================================= */
+
+window.deleteVideo =
+async function(id){
+
+if(
+!confirm(
+'Delete this video?'
+)
+){
+
+return;
+
+}
+
+
+const {
+error
+} =
+await sb
+.from('videos')
+.delete()
+.eq('id',id);
+
+
+if(error){
+
+show(
+'Delete failed: ' +
+error.message
+);
+
+return;
+
+}
+
+
+show(
+'Video deleted successfully.',
+'success'
+);
+
+
 await load();
 
 };
 
-$('newVideoBtn').onclick = function(){
+
+/* =========================================
+   NEW VIDEO
+========================================= */
+
+$('newVideoBtn')
+.onclick =
+function(){
 
 openVideoEditor();
 
 };
 
-$('addVideoTopBtn').onclick = function(){
+
+$('addVideoTopBtn')
+.onclick =
+function(){
 
 openVideoEditor();
 
 };
 
-$('cancelVideoBtn').onclick = function(){
 
-$('videoEditor').classList.add('hidden');
+/* =========================================
+   CANCEL VIDEO
+========================================= */
+
+$('cancelVideoBtn')
+.onclick =
+function(){
+
+$('videoEditor')
+.classList
+.add('hidden');
 
 };
 
-/* =========================
+
+/* =========================================
    SAVE VIDEO
-========================= */
+========================================= */
 
-$('videoForm').onsubmit =
+$('videoForm')
+.onsubmit =
 async function(event){
 
 event.preventDefault();
 
 hide();
 
+
 const payload = {
 
 title:
-$('videoTitle').value.trim(),
+$('videoTitle')
+.value
+.trim(),
 
 description:
-$('videoDescription').value.trim() || null,
+$('videoDescription')
+.value
+.trim()
+||
+null,
 
 video_url:
-$('videoUrl').value.trim(),
+$('videoUrl')
+.value
+.trim(),
 
 thumbnail_url:
-$('videoThumbnail').value.trim() || null,
+$('videoThumbnail')
+.value
+.trim()
+||
+null,
 
 category_slug:
-$('videoCategory').value,
+$('videoCategory')
+.value,
 
 status:
-$('videoStatus').value,
+$('videoStatus')
+.value,
 
 author_id:
 user.id
 
 };
 
+
 const id =
-$('videoId').value;
+$('videoId')
+.value;
+
 
 let result;
+
 
 if(id){
 
@@ -1214,33 +2121,80 @@ await sb
 
 }
 
+
 if(result.error){
 
-show(result.error.message);
+show(
+'Video save failed: ' +
+result.error.message
+);
 
 return;
 
 }
 
-show('Video saved successfully.');
 
-$('videoEditor').classList.add('hidden');
+show(
+'Video saved successfully.',
+'success'
+);
+
+
+$('videoEditor')
+.classList
+.add('hidden');
+
 
 await load();
 
 };
 
-/* =========================
+
+/* =========================================
    REFRESH
-========================= */
+========================================= */
 
-$('refreshBtn').onclick = load;
+$('refreshBtn')
+.onclick =
+async function(){
 
-/* =========================
+const button =
+$('refreshBtn');
+
+button.disabled =
+true;
+
+button.textContent =
+'Loading…';
+
+
+try{
+
+await load();
+
+}catch(error){
+
+console.error(error);
+
+}finally{
+
+button.disabled =
+false;
+
+button.textContent =
+'Refresh';
+
+}
+
+};
+
+
+/* =========================================
    LOGOUT
-========================= */
+========================================= */
 
-$('logout').onclick =
+$('logout')
+.onclick =
 async function(){
 
 if(sb){
@@ -1249,13 +2203,16 @@ await sb.auth.signOut();
 
 }
 
-location.replace('admin-login.html');
+location.replace(
+'admin-login.html'
+);
 
 };
 
-/* =========================
+
+/* =========================================
    START
-========================= */
+========================================= */
 
 init();
 
