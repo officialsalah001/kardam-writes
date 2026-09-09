@@ -1,25 +1,1275 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin Dashboard | Kardam Writes</title><link rel="stylesheet" href="hamza_kardam_writes_website/style.css">
-<style>body{background:#f5f6f8}.wrap{width:min(1100px,94%);margin:25px auto}.top{display:flex;justify-content:space-between;align-items:center;gap:15px}.top h1{font:700 38px 'Playfair Display',serif}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.stat,.panel{background:#fff;border:1px solid #e4e6eb;border-radius:12px;padding:18px;margin-top:15px}.stat small{display:block;color:#687386;font-size:10px}.stat b{font-size:26px}.actions{display:flex;flex-wrap:wrap;gap:10px}.action,.btn2{padding:11px 14px;border:0;border-radius:7px;background:#0b1730;color:#fff;font-size:12px;font-weight:700;cursor:pointer}.gold{background:#d7aa55;color:#0b1730}.danger{background:#a33;color:#fff}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.formgrid .full{grid-column:1/-1}.field label{display:block;font-size:10px;font-weight:800;margin:0 0 5px}.field input,.field textarea,.field select{width:100%;box-sizing:border-box;padding:11px;border:1px solid #ddd;border-radius:7px;font:inherit}.field textarea{min-height:130px}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:12px}th,td{padding:10px;border-bottom:1px solid #eee;text-align:left;white-space:nowrap}.notice{padding:12px;background:#fff7df;border-left:3px solid #d7aa55;font-size:11px}.msg{margin-top:10px;padding:10px;display:none;font-size:12px}.row-actions button{margin-right:5px}.hidden{display:none!important}@media(max-width:650px){.stats{grid-template-columns:1fr 1fr}.top{display:block}.formgrid{grid-template-columns:1fr}.formgrid .full{grid-column:auto}}</style></head>
-<body><div class="wrap"><div class="top"><div><a href="hamza_kardam_writes_website/index.html">← View Website</a><h1>Admin Dashboard</h1></div><button id="logout" class="btn2 danger">Log out</button></div>
-<div id="guard" class="panel">Checking secure session…</div>
-<div id="app" class="hidden"><div class="stats"><div class="stat"><small>ARTICLES</small><b id="articleCount">0</b></div><div class="stat"><small>VIEWS</small><b id="viewCount">0</b></div><div class="stat"><small>COMMENTS</small><b id="commentCount">0</b></div><div class="stat"><small>ADS</small><b id="adCount">0</b></div></div>
-<div class="panel"><div class="actions"><button class="action gold" id="newBtn">＋ New Article</button><button class="action" id="refreshBtn">Refresh</button></div><div id="msg" class="msg"></div></div>
-<div class="panel hidden" id="editor"><h2 id="editorTitle">New Article</h2><form id="articleForm"><input type="hidden" id="articleId"><div class="formgrid"><div class="field full"><label>TITLE</label><input id="title" required></div><div class="field"><label>SLUG</label><input id="slug" required></div><div class="field"><label>CATEGORY</label><select id="category" required><option value="education">Ilimi / Education</option><option value="history">Tarihi / History</option><option value="lifestyle">Rayuwa / Lifestyle</option><option value="technology">Fasaha / Technology</option><option value="business">Business / Kasuwanci</option></select></div><div class="field full"><label>EXCERPT</label><textarea id="excerpt" style="min-height:80px"></textarea></div><div class="field full"><label>CONTENT</label><textarea id="content" required></textarea></div><div class="field"><label>IMAGE URL (optional)</label><input id="imageUrl" placeholder="https://…"></div><div class="field"><label>STATUS</label><select id="status"><option value="draft">Draft</option><option value="published">Published</option></select></div></div><div class="actions" style="margin-top:12px"><button class="action gold">Save Article</button><button type="button" class="action" id="cancelBtn">Cancel</button></div></form></div>
-<div class="panel"><h2>Articles</h2><div class="tablewrap"><table><thead><tr><th>Title</th><th>Category</th><th>Status</th><th>Views</th><th>Actions</th></tr></thead><tbody id="rows"></tbody></table></div></div>
-<div class="panel"><div class="notice"><b>Security:</b> password is handled by Supabase Auth. This browser app uses only the public publishable key; database access is protected by Row Level Security.</div></div></div></div>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Admin Dashboard | Kardam Writes</title>
+
+<link rel="stylesheet" href="hamza_kardam_writes_website/style.css">
+
+<style>
+body{
+  background:#f5f6f8;
+}
+
+.wrap{
+  width:min(1100px,94%);
+  margin:25px auto;
+}
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+}
+
+.top h1{
+  font:700 38px 'Playfair Display',serif;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:12px;
+}
+
+.stat,.panel{
+  background:#fff;
+  border:1px solid #e4e6eb;
+  border-radius:12px;
+  padding:18px;
+  margin-top:15px;
+}
+
+.stat small{
+  display:block;
+  color:#687386;
+  font-size:10px;
+}
+
+.stat b{
+  font-size:26px;
+}
+
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.action,.btn2{
+  padding:11px 14px;
+  border:0;
+  border-radius:7px;
+  background:#0b1730;
+  color:#fff;
+  font-size:12px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.gold{
+  background:#d7aa55;
+  color:#0b1730;
+}
+
+.danger{
+  background:#a33;
+  color:#fff;
+}
+
+.blue{
+  background:#1d5fa7;
+  color:#fff;
+}
+
+.formgrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.formgrid .full{
+  grid-column:1/-1;
+}
+
+.field label{
+  display:block;
+  font-size:10px;
+  font-weight:800;
+  margin:0 0 5px;
+}
+
+.field input,
+.field textarea,
+.field select{
+  width:100%;
+  box-sizing:border-box;
+  padding:11px;
+  border:1px solid #ddd;
+  border-radius:7px;
+  font:inherit;
+}
+
+.field textarea{
+  min-height:130px;
+}
+
+.tablewrap{
+  overflow:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:12px;
+}
+
+th,td{
+  padding:10px;
+  border-bottom:1px solid #eee;
+  text-align:left;
+  white-space:nowrap;
+}
+
+.notice{
+  padding:12px;
+  background:#fff7df;
+  border-left:3px solid #d7aa55;
+  font-size:11px;
+}
+
+.msg{
+  margin-top:10px;
+  padding:10px;
+  display:none;
+  font-size:12px;
+  border-radius:7px;
+}
+
+.row-actions button{
+  margin-right:5px;
+}
+
+.section-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.video-thumb{
+  width:70px;
+  height:42px;
+  object-fit:cover;
+  border-radius:6px;
+  background:#eee;
+}
+
+.hidden{
+  display:none!important;
+}
+
+@media(max-width:850px){
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:650px){
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .top{
+    display:block;
+  }
+
+  .formgrid{
+    grid-template-columns:1fr;
+  }
+
+  .formgrid .full{
+    grid-column:auto;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+<div class="top">
+
+<div>
+
+<a href="hamza_kardam_writes_website/index.html">
+← View Website
+</a>
+
+<h1>Admin Dashboard</h1>
+
+</div>
+
+<button id="logout" class="btn2 danger">
+Log out
+</button>
+
+</div>
+
+
+<div id="guard" class="panel">
+Checking secure session…
+</div>
+
+
+<div id="app" class="hidden">
+
+
+<!-- =========================
+     STATS
+========================= -->
+
+<div class="stats">
+
+<div class="stat">
+<small>ARTICLES</small>
+<b id="articleCount">0</b>
+</div>
+
+<div class="stat">
+<small>VIEWS</small>
+<b id="viewCount">0</b>
+</div>
+
+<div class="stat">
+<small>COMMENTS</small>
+<b id="commentCount">0</b>
+</div>
+
+<div class="stat">
+<small>ADS</small>
+<b id="adCount">0</b>
+</div>
+
+<div class="stat">
+<small>VIDEOS</small>
+<b id="videoCount">0</b>
+</div>
+
+</div>
+
+
+<!-- =========================
+     ACTIONS
+========================= -->
+
+<div class="panel">
+
+<div class="actions">
+
+<button class="action gold" id="newBtn">
+＋ New Article
+</button>
+
+<button class="action blue" id="newVideoBtn">
+🎥 Add Video
+</button>
+
+<button class="action" id="refreshBtn">
+Refresh
+</button>
+
+</div>
+
+<div id="msg" class="msg"></div>
+
+</div>
+
+
+
+<!-- =========================
+     ARTICLE EDITOR
+========================= -->
+
+<div class="panel hidden" id="editor">
+
+<h2 id="editorTitle">
+New Article
+</h2>
+
+<form id="articleForm">
+
+<input type="hidden" id="articleId">
+
+<div class="formgrid">
+
+<div class="field full">
+<label>TITLE</label>
+<input id="title" required>
+</div>
+
+
+<div class="field">
+<label>SLUG</label>
+<input id="slug" required>
+</div>
+
+
+<div class="field">
+<label>CATEGORY</label>
+
+<select id="category" required>
+
+<option value="education">
+Ilimi / Education
+</option>
+
+<option value="history">
+Tarihi / History
+</option>
+
+<option value="lifestyle">
+Rayuwa / Lifestyle
+</option>
+
+<option value="technology">
+Fasaha / Technology
+</option>
+
+<option value="business">
+Business / Kasuwanci
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field full">
+<label>EXCERPT</label>
+<textarea id="excerpt" style="min-height:80px"></textarea>
+</div>
+
+
+<div class="field full">
+<label>CONTENT</label>
+<textarea id="content" required></textarea>
+</div>
+
+
+<div class="field">
+<label>IMAGE URL (optional)</label>
+<input id="imageUrl" placeholder="https://…">
+</div>
+
+
+<div class="field">
+<label>STATUS</label>
+
+<select id="status">
+
+<option value="draft">
+Draft
+</option>
+
+<option value="published">
+Published
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<div class="actions" style="margin-top:12px">
+
+<button class="action gold">
+Save Article
+</button>
+
+<button type="button" class="action" id="cancelBtn">
+Cancel
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+
+
+<!-- =========================
+     VIDEO EDITOR
+========================= -->
+
+<div class="panel hidden" id="videoEditor">
+
+<h2 id="videoEditorTitle">
+Add Video
+</h2>
+
+<form id="videoForm">
+
+<input type="hidden" id="videoId">
+
+<div class="formgrid">
+
+
+<div class="field full">
+
+<label>VIDEO TITLE</label>
+
+<input
+id="videoTitle"
+placeholder="Example: Sabon Labari daga Bauchi"
+required
+>
+
+</div>
+
+
+<div class="field full">
+
+<label>VIDEO URL</label>
+
+<input
+id="videoUrl"
+placeholder="https://www.youtube.com/watch?v=..."
+required
+>
+
+</div>
+
+
+<div class="field full">
+
+<label>DESCRIPTION</label>
+
+<textarea
+id="videoDescription"
+placeholder="Short description about the video..."
+></textarea>
+
+</div>
+
+
+<div class="field">
+
+<label>THUMBNAIL URL</label>
+
+<input
+id="videoThumbnail"
+placeholder="https://..."
+>
+
+</div>
+
+
+<div class="field">
+
+<label>CATEGORY</label>
+
+<select id="videoCategory">
+
+<option value="news">
+News / Labarai
+</option>
+
+<option value="politics">
+Politics / Siyasa
+</option>
+
+<option value="sports">
+Sports / Kwallo
+</option>
+
+<option value="technology">
+Technology / Fasaha
+</option>
+
+<option value="education">
+Education / Ilimi
+</option>
+
+<option value="lifestyle">
+Lifestyle / Rayuwa
+</option>
+
+<option value="business">
+Business / Kasuwanci
+</option>
+
+<option value="interviews">
+Interviews / Hirarraki
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>STATUS</label>
+
+<select id="videoStatus">
+
+<option value="draft">
+Draft
+</option>
+
+<option value="published">
+Published
+</option>
+
+</select>
+
+</div>
+
+
+</div>
+
+
+<div class="actions" style="margin-top:12px">
+
+<button class="action gold">
+Save Video
+</button>
+
+<button
+type="button"
+class="action"
+id="cancelVideoBtn"
+>
+Cancel
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+
+
+<!-- =========================
+     ARTICLES
+========================= -->
+
+<div class="panel">
+
+<div class="section-title">
+
+<h2>
+Articles
+</h2>
+
+</div>
+
+
+<div class="tablewrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Title</th>
+<th>Category</th>
+<th>Status</th>
+<th>Views</th>
+<th>Actions</th>
+
+</tr>
+
+</thead>
+
+<tbody id="rows"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================
+     VIDEOS
+========================= -->
+
+<div class="panel">
+
+<div class="section-title">
+
+<h2>
+🎥 Videos
+</h2>
+
+<button
+class="btn2 blue"
+id="addVideoTopBtn"
+>
+＋ Add Video
+</button>
+
+</div>
+
+
+<p style="font-size:12px;color:#687386">
+
+Ka saka video daga nan. Idan ka zaɓi
+<b>Published</b>, zai bayyana a Videos page.
+
+</p>
+
+
+<div class="tablewrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Thumbnail</th>
+<th>Title</th>
+<th>Category</th>
+<th>Status</th>
+<th>Views</th>
+<th>Actions</th>
+
+</tr>
+
+</thead>
+
+<tbody id="videoRows"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================
+     SECURITY
+========================= -->
+
+<div class="panel">
+
+<div class="notice">
+
+<b>Security:</b>
+
+password is handled by Supabase Auth.
+
+This browser app uses only the public
+publishable key; database access is
+protected by Row Level Security.
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script src="supabase-config.js"></script>
+
 <script src="supabase-client.js"></script>
 
+
 <script>
-let sb,user,articles=[];const $=id=>document.getElementById(id);function show(t){$('msg').textContent=t;$('msg').style.display='block'}function hide(){ $('msg').style.display='none' }
-async function init(){if(!window.kardamSupabase){$('guard').textContent='Supabase is not configured. Add supabase-config.js first.';return}sb=window.kardamSupabase;const {data}=await sb.auth.getUser();user=data.user;if(!user){location.href='admin-login.html';return}const {data:p,error}=await sb.from('profiles').select('role').eq('id',user.id).single();if(error||!p||!['admin','editor'].includes(p.role)){await sb.auth.signOut();location.href='admin-login.html';return}$('guard').classList.add('hidden');$('app').classList.remove('hidden');await load();}
-async function load(){hide();const [a,c,d]=await Promise.all([sb.from('articles').select('*').order('created_at',{ascending:false}),sb.from('comments').select('id',{count:'exact',head:true}),sb.from('ads').select('id',{count:'exact',head:true})]);if(a.error){show(a.error.message);return}articles=a.data||[];$('articleCount').textContent=articles.length;$('viewCount').textContent=articles.reduce((s,x)=>s+(x.views||0),0);$('commentCount').textContent=c.count||0;$('adCount').textContent=d.count||0;$('rows').innerHTML=articles.map(x=>`<tr><td>${esc(x.title)}</td><td>${esc(x.category_slug)}</td><td>${x.status}</td><td>${x.views||0}</td><td class="row-actions"><button class="btn2" onclick="editArticle(${x.id})">Edit</button><button class="btn2 danger" onclick="deleteArticle(${x.id})">Delete</button></td></tr>`).join('')||'<tr><td colspan="5">No articles yet.</td></tr>'}
-function esc(s=''){return String(s).replace(/[&<>'"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[m]))}
-function openEditor(x){$('editor').classList.remove('hidden');$('editorTitle').textContent=x?'Edit Article':'New Article';$('articleId').value=x?.id||'';$('title').value=x?.title||'';$('slug').value=x?.slug||'';$('category').value=x?.category_slug||'education';$('excerpt').value=x?.excerpt||'';$('content').value=x?.content||'';$('imageUrl').value=x?.image_url||'';$('status').value=x?.status||'draft';window.scrollTo({top:0,behavior:'smooth'})}
-window.editArticle=id=>openEditor(articles.find(x=>x.id===id));window.deleteArticle=async id=>{if(!confirm('Delete this article?'))return;const {error}=await sb.from('articles').delete().eq('id',id);if(error)show(error.message);else await load()};
-$('newBtn').onclick=()=>openEditor();$('cancelBtn').onclick=()=>$('editor').classList.add('hidden');$('refreshBtn').onclick=load;$('logout').onclick=async()=>{await sb.auth.signOut();location.href='admin-login.html'};
-$('articleForm').onsubmit=async e=>{e.preventDefault();hide();const payload={title:$('title').value.trim(),slug:$('slug').value.trim().toLowerCase().replace(/[^a-z0-9-]+/g,'-').replace(/^-|-$/g,''),category_slug:$('category').value,excerpt:$('excerpt').value.trim(),content:$('content').value.trim(),image_url:$('imageUrl').value.trim()||null,status:$('status').value,author_id:user.id};const id=$('articleId').value;const q=id?sb.from('articles').update(payload).eq('id',id):sb.from('articles').insert(payload);const {error}=await q;if(error){show(error.message);return}$('editor').classList.add('hidden');await load()};
-init();
-</script></body></html>
+
+let sb,user,articles=[],videos=[];
+
+const $=id=>document.getElementById(id);
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+function show(t){
+
+$('msg').textContent=t;
+
+$('msg').style.display='block';
+
+}
+
+function hide(){
+
+$('msg').style.display='none';
+
+}
+
+
+/* =========================
+   INIT
+========================= */
+
+async function init(){
+
+if(!window.kardamSupabase){
+
+$('guard').textContent=
+'Supabase is not configured. Add supabase-config.js first.';
+
+return;
+
+}
+
+sb=window.kardamSupabase;
+
+const {data}=await sb.auth.getUser();
+
+user=data.user;
+
+if(!user){
+
+location.href='admin-login.html';
+
+return;
+
+}
+
+
+const {data:p,error}=await sb
+.from('profiles')
+.select('role')
+.eq('id',user.id)
+.single();
+
+
+if(
+error ||
+!p ||
+!['admin','editor'].includes(p.role)
+){
+
+await sb.auth.signOut();
+
+location.href='admin-login.html';
+
+return;
+
+}
+
+
+$('guard').classList.add('hidden');
+
+$('app').classList.remove('hidden');
+
+await load();
+
+}
+
+
+/* =========================
+   LOAD EVERYTHING
+========================= */
+
+async function load(){
+
+hide();
+
+
+const [
+a,
+c,
+d,
+v
+]=await Promise.all([
+
+sb
+.from('articles')
+.select('*')
+.order('created_at',{ascending:false}),
+
+sb
+.from('comments')
+.select('id',{count:'exact',head:true}),
+
+sb
+.from('ads')
+.select('id',{count:'exact',head:true}),
+
+sb
+.from('videos')
+.select('*')
+.order('created_at',{ascending:false})
+
+]);
+
+
+if(a.error){
+
+show(a.error.message);
+
+return;
+
+}
+
+
+if(v.error){
+
+show(
+'Videos table error: '+v.error.message
+);
+
+return;
+
+}
+
+
+articles=a.data||[];
+
+videos=v.data||[];
+
+
+$('articleCount').textContent=
+articles.length;
+
+
+$('viewCount').textContent=
+articles.reduce(
+(s,x)=>s+(x.views||0),
+0
+);
+
+
+$('commentCount').textContent=
+c.count||0;
+
+
+$('adCount').textContent=
+d.count||0;
+
+
+$('videoCount').textContent=
+videos.length;
+
+
+renderArticles();
+
+renderVideos();
+
+}
+
+
+/* =========================
+   ESCAPE HTML
+========================= */
+
+function esc(s=''){
+
+return String(s).replace(
+/[&<>'"]/g,
+m=>({
+
+'&':'&amp;',
+'<':'&lt;',
+'>':'&gt;',
+"'":'&#39;',
+'"':'&quot;'
+
+}[m])
+
+);
+
+}
+
+
+/* =========================
+   ARTICLES TABLE
+========================= */
+
+function renderArticles(){
+
+$('rows').innerHTML=
+
+articles.map(x=>`
+
+<tr>
+
+<td>
+${esc(x.title)}
+</td>
+
+<td>
+${esc(x.category_slug)}
+</td>
+
+<td>
+${esc(x.status)}
+</td>
+
+<td>
+${x.views||0}
+</td>
+
+<td class="row-actions">
+
+<button
+class="btn2"
+onclick="editArticle(${x.id})"
+>
+Edit
+</button>
+
+<button
+class="btn2 danger"
+onclick="deleteArticle(${x.id})"
+>
+Delete
+</button>
+
+</td>
+
+</tr>
+
+`).join('')
+
+||
+
+'<tr><td colspan="5">No articles yet.</td></tr>';
+
+}
+
+
+/* =========================
+   VIDEO TABLE
+========================= */
+
+function renderVideos(){
+
+$('videoRows').innerHTML=
+
+videos.map(x=>`
+
+<tr>
+
+<td>
+
+${
+x.thumbnail_url
+
+?
+
+`<img
+class="video-thumb"
+src="${esc(x.thumbnail_url)}"
+alt=""
+loading="lazy"
+>`
+
+:
+
+'—'
+
+}
+
+</td>
+
+
+<td>
+${esc(x.title)}
+</td>
+
+
+<td>
+${esc(x.category_slug)}
+</td>
+
+
+<td>
+${esc(x.status)}
+</td>
+
+
+<td>
+${x.views||0}
+</td>
+
+
+<td class="row-actions">
+
+<button
+class="btn2"
+onclick="editVideo(${x.id})"
+>
+Edit
+</button>
+
+
+<button
+class="btn2 danger"
+onclick="deleteVideo(${x.id})"
+>
+Delete
+</button>
+
+</td>
+
+</tr>
+
+`).join('')
+
+||
+
+'<tr><td colspan="6">No videos yet.</td></tr>';
+
+}
+
+
+/* =========================
+   ARTICLE EDITOR
+========================= */
+
+function openEditor(x){
+
+$('editor').classList.remove('hidden');
+
+$('editorTitle').textContent=
+x?'Edit Article':'New Article';
+
+
+$('articleId').value=
+x?.id||'';
+
+
+$('title').value=
+x?.title||'';
+
+
+$('slug').value=
+x?.slug||'';
+
+
+$('category').value=
+x?.category_slug||'education';
+
+
+$('excerpt').value=
+x?.excerpt||'';
+
+
+$('content').value=
+x?.content||'';
+
+
+$('imageUrl').value=
+x?.image_url||'';
+
+
+$('status').value=
+x?.status||'draft';
+
+
+window.scrollTo({
+top:0,
+behavior:'smooth'
+});
+
+}
+
+
+window.editArticle=id=>
+openEditor(
+articles.find(x=>x.id===id)
+);
+
+
+window.deleteArticle=
+async id=>{
+
+if(!confirm(
+'Delete this article?'
+)) return;
+
+
+const {error}=await sb
+.from('articles')
+.delete()
+.eq('id',id);
+
+
+if(error){
+
+show(error.message);
+
+}else{
+
+await load();
+
+}
+
+};
+
+
+/* =========================
+   VIDEO EDITOR
+========================= */
+
+function openVideoEditor(x){
+
+$('videoEditor').classList.remove(
+'hidden'
+);
+
+$('videoEditorTitle').textContent=
+x?'Edit Video':'Add Video';
+
+
+$('videoId').value=
+x?.id||'';
+
+
+$('videoTitle').value=
+x?.title||'';
+
+
+$('videoUrl').value=
+x?.video_url||'';
+
+
+$('videoDescription').value=
+x?.description||'';
+
+
+$('videoThumbnail').value=
+x?.thumbnail_url||'';
+
+
+$('videoCategory').value=
+x?.category_slug||'news';
+
+
+$('videoStatus').value=
+x?.status||'draft';
+
+
+window.scrollTo({
+top:0,
+behavior:'smooth'
+});
+
+}
+
+
+window.editVideo=id=>
+openVideoEditor(
+videos.find(x=>x.id===id)
+);
+
+
+window.deleteVideo=
+async id=>{
+
+if(!confirm(
+'Delete this video?'
+)) return;
+
+
+const {error}=await sb
+.from('videos')
+.delete()
+.eq('id',id);
+
+
+if(error){
+
+show(error.message);
+
+}else{
+
+await load();
+
+}
+
+};
+
+
+/* =========================
+   ARTICLE BUTTONS
+========================= */
+
+$('newBtn').onclick=()=>
+openEditor();
+
+
+$('cancelBtn').onclick=()=>
+$('editor').classList.add('hidden');
+
+
+/* =========================
+   VIDEO BUTTONS
+========================= */
+
+$('newVideoBtn').onclick=()=>
+openVideoEditor();
+
+
+$('addVideoTopBtn').onclick=()=>
+openVideoEditor();
+
+
+$('cancelVideoBtn').onclick=()=>
+$('videoEditor').classList.add('hidden');
+
+
+/* =========================
+   REFRESH
+========================= */
+
+$('refreshBtn').onclick=load;
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+$('logout').onclick=
+async()=>{
+
+await sb.auth.signOut();
+
+location.href='admin-login.html';
+
+};
+
+
+/* =========================
+   SAVE ARTICLE
+========================= */
+
+$('articleForm').onsubmit=
+async e=>{
+
+e.preventDefault();
+
+hide();
+
+
+const payload={
+
+title:
+$('
