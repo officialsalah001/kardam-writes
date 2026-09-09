@@ -9,192 +9,43 @@
 <link rel="stylesheet" href="hamza_kardam_writes_website/style.css">
 
 <style>
-body{
-  background:#f5f6f8;
-}
-
-.wrap{
-  width:min(1100px,94%);
-  margin:25px auto;
-}
-
-.top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
-}
-
-.top h1{
-  font:700 38px 'Playfair Display',serif;
-}
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:12px;
-}
-
-.stat,.panel{
-  background:#fff;
-  border:1px solid #e4e6eb;
-  border-radius:12px;
-  padding:18px;
-  margin-top:15px;
-}
-
-.stat small{
-  display:block;
-  color:#687386;
-  font-size:10px;
-}
-
-.stat b{
-  font-size:26px;
-}
-
-.actions{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-}
-
-.action,.btn2{
-  padding:11px 14px;
-  border:0;
-  border-radius:7px;
-  background:#0b1730;
-  color:#fff;
-  font-size:12px;
-  font-weight:700;
-  cursor:pointer;
-}
-
-.gold{
-  background:#d7aa55;
-  color:#0b1730;
-}
-
-.danger{
-  background:#a33;
-  color:#fff;
-}
-
-.blue{
-  background:#1d5fa7;
-  color:#fff;
-}
-
-.formgrid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-}
-
-.formgrid .full{
-  grid-column:1/-1;
-}
-
-.field label{
-  display:block;
-  font-size:10px;
-  font-weight:800;
-  margin:0 0 5px;
-}
-
-.field input,
-.field textarea,
-.field select{
-  width:100%;
-  box-sizing:border-box;
-  padding:11px;
-  border:1px solid #ddd;
-  border-radius:7px;
-  font:inherit;
-}
-
-.field textarea{
-  min-height:130px;
-}
-
-.tablewrap{
-  overflow:auto;
-}
-
-table{
-  width:100%;
-  border-collapse:collapse;
-  font-size:12px;
-}
-
-th,td{
-  padding:10px;
-  border-bottom:1px solid #eee;
-  text-align:left;
-  white-space:nowrap;
-}
-
-.notice{
-  padding:12px;
-  background:#fff7df;
-  border-left:3px solid #d7aa55;
-  font-size:11px;
-}
-
-.msg{
-  margin-top:10px;
-  padding:10px;
-  display:none;
-  font-size:12px;
-  border-radius:7px;
-}
-
-.row-actions button{
-  margin-right:5px;
-}
-
-.section-title{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-}
-
-.video-thumb{
-  width:70px;
-  height:42px;
-  object-fit:cover;
-  border-radius:6px;
-  background:#eee;
-}
-
-.hidden{
-  display:none!important;
-}
+body{background:#f5f6f8}
+.wrap{width:min(1100px,94%);margin:25px auto}
+.top{display:flex;justify-content:space-between;align-items:center;gap:15px}
+.top h1{font:700 38px 'Playfair Display',serif}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.stat,.panel{background:#fff;border:1px solid #e4e6eb;border-radius:12px;padding:18px;margin-top:15px}
+.stat small{display:block;color:#687386;font-size:10px}
+.stat b{font-size:26px}
+.actions{display:flex;flex-wrap:wrap;gap:10px}
+.action,.btn2{padding:11px 14px;border:0;border-radius:7px;background:#0b1730;color:#fff;font-size:12px;font-weight:700;cursor:pointer}
+.gold{background:#d7aa55;color:#0b1730}
+.danger{background:#a33;color:#fff}
+.blue{background:#1d5fa7;color:#fff}
+.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.formgrid .full{grid-column:1/-1}
+.field label{display:block;font-size:10px;font-weight:800;margin:0 0 5px}
+.field input,.field textarea,.field select{width:100%;box-sizing:border-box;padding:11px;border:1px solid #ddd;border-radius:7px;font:inherit}
+.field textarea{min-height:130px}
+.tablewrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th,td{padding:10px;border-bottom:1px solid #eee;text-align:left;white-space:nowrap}
+.notice{padding:12px;background:#fff7df;border-left:3px solid #d7aa55;font-size:11px}
+.msg{margin-top:10px;padding:10px;display:none;font-size:12px;border-radius:7px}
+.row-actions button{margin-right:5px}
+.section-title{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.video-thumb{width:70px;height:42px;object-fit:cover;border-radius:6px;background:#eee}
+.hidden{display:none!important}
 
 @media(max-width:850px){
-  .stats{
-    grid-template-columns:repeat(2,1fr);
-  }
+.stats{grid-template-columns:repeat(2,1fr)}
 }
 
 @media(max-width:650px){
-
-  .stats{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .top{
-    display:block;
-  }
-
-  .formgrid{
-    grid-template-columns:1fr;
-  }
-
-  .formgrid .full{
-    grid-column:auto;
-  }
+.stats{grid-template-columns:1fr 1fr}
+.top{display:block}
+.formgrid{grid-template-columns:1fr}
+.formgrid .full{grid-column:auto}
 }
 </style>
 </head>
@@ -221,18 +72,13 @@ Log out
 
 </div>
 
-
 <div id="guard" class="panel">
 Checking secure session…
 </div>
 
-
 <div id="app" class="hidden">
 
-
-<!-- =========================
-     STATS
-========================= -->
+<!-- STATS -->
 
 <div class="stats">
 
@@ -263,10 +109,7 @@ Checking secure session…
 
 </div>
 
-
-<!-- =========================
-     ACTIONS
-========================= -->
+<!-- ACTIONS -->
 
 <div class="panel">
 
@@ -290,17 +133,11 @@ Refresh
 
 </div>
 
-
-
-<!-- =========================
-     ARTICLE EDITOR
-========================= -->
+<!-- ARTICLE EDITOR -->
 
 <div class="panel hidden" id="editor">
 
-<h2 id="editorTitle">
-New Article
-</h2>
+<h2 id="editorTitle">New Article</h2>
 
 <form id="articleForm">
 
@@ -313,80 +150,52 @@ New Article
 <input id="title" required>
 </div>
 
-
 <div class="field">
 <label>SLUG</label>
 <input id="slug" required>
 </div>
-
 
 <div class="field">
 <label>CATEGORY</label>
 
 <select id="category" required>
 
-<option value="education">
-Ilimi / Education
-</option>
-
-<option value="history">
-Tarihi / History
-</option>
-
-<option value="lifestyle">
-Rayuwa / Lifestyle
-</option>
-
-<option value="technology">
-Fasaha / Technology
-</option>
-
-<option value="business">
-Business / Kasuwanci
-</option>
+<option value="education">Ilimi / Education</option>
+<option value="history">Tarihi / History</option>
+<option value="lifestyle">Rayuwa / Lifestyle</option>
+<option value="technology">Fasaha / Technology</option>
+<option value="business">Business / Kasuwanci</option>
 
 </select>
 
 </div>
-
 
 <div class="field full">
 <label>EXCERPT</label>
 <textarea id="excerpt" style="min-height:80px"></textarea>
 </div>
 
-
 <div class="field full">
 <label>CONTENT</label>
 <textarea id="content" required></textarea>
 </div>
 
-
 <div class="field">
 <label>IMAGE URL (optional)</label>
-<input id="imageUrl" placeholder="https://…">
+<input id="imageUrl" placeholder="https://...">
 </div>
-
 
 <div class="field">
 <label>STATUS</label>
 
 <select id="status">
-
-<option value="draft">
-Draft
-</option>
-
-<option value="published">
-Published
-</option>
-
+<option value="draft">Draft</option>
+<option value="published">Published</option>
 </select>
 
 </div>
 
 </div>
-
 
 <div class="actions" style="margin-top:12px">
 
@@ -404,24 +213,17 @@ Cancel
 
 </div>
 
-
-
-<!-- =========================
-     VIDEO EDITOR
-========================= -->
+<!-- VIDEO EDITOR -->
 
 <div class="panel hidden" id="videoEditor">
 
-<h2 id="videoEditorTitle">
-Add Video
-</h2>
+<h2 id="videoEditorTitle">Add Video</h2>
 
 <form id="videoForm">
 
 <input type="hidden" id="videoId">
 
 <div class="formgrid">
-
 
 <div class="field full">
 
@@ -430,11 +232,9 @@ Add Video
 <input
 id="videoTitle"
 placeholder="Example: Sabon Labari daga Bauchi"
-required
->
+required>
 
 </div>
-
 
 <div class="field full">
 
@@ -443,11 +243,9 @@ required
 <input
 id="videoUrl"
 placeholder="https://www.youtube.com/watch?v=..."
-required
->
+required>
 
 </div>
-
 
 <div class="field full">
 
@@ -455,11 +253,9 @@ required
 
 <textarea
 id="videoDescription"
-placeholder="Short description about the video..."
-></textarea>
+placeholder="Short description about the video..."></textarea>
 
 </div>
-
 
 <div class="field">
 
@@ -467,11 +263,9 @@ placeholder="Short description about the video..."
 
 <input
 id="videoThumbnail"
-placeholder="https://..."
->
+placeholder="https://...">
 
 </div>
-
 
 <div class="field">
 
@@ -479,42 +273,18 @@ placeholder="https://..."
 
 <select id="videoCategory">
 
-<option value="news">
-News / Labarai
-</option>
-
-<option value="politics">
-Politics / Siyasa
-</option>
-
-<option value="sports">
-Sports / Kwallo
-</option>
-
-<option value="technology">
-Technology / Fasaha
-</option>
-
-<option value="education">
-Education / Ilimi
-</option>
-
-<option value="lifestyle">
-Lifestyle / Rayuwa
-</option>
-
-<option value="business">
-Business / Kasuwanci
-</option>
-
-<option value="interviews">
-Interviews / Hirarraki
-</option>
+<option value="news">News / Labarai</option>
+<option value="politics">Politics / Siyasa</option>
+<option value="sports">Sports / Kwallo</option>
+<option value="technology">Technology / Fasaha</option>
+<option value="education">Education / Ilimi</option>
+<option value="lifestyle">Lifestyle / Rayuwa</option>
+<option value="business">Business / Kasuwanci</option>
+<option value="interviews">Interviews / Hirarraki</option>
 
 </select>
 
 </div>
-
 
 <div class="field">
 
@@ -522,21 +292,14 @@ Interviews / Hirarraki
 
 <select id="videoStatus">
 
-<option value="draft">
-Draft
-</option>
-
-<option value="published">
-Published
-</option>
+<option value="draft">Draft</option>
+<option value="published">Published</option>
 
 </select>
 
 </div>
 
-
 </div>
-
 
 <div class="actions" style="margin-top:12px">
 
@@ -544,11 +307,7 @@ Published
 Save Video
 </button>
 
-<button
-type="button"
-class="action"
-id="cancelVideoBtn"
->
+<button type="button" class="action" id="cancelVideoBtn">
 Cancel
 </button>
 
@@ -558,22 +317,13 @@ Cancel
 
 </div>
 
-
-
-<!-- =========================
-     ARTICLES
-========================= -->
+<!-- ARTICLES -->
 
 <div class="panel">
 
 <div class="section-title">
-
-<h2>
-Articles
-</h2>
-
+<h2>Articles</h2>
 </div>
-
 
 <div class="tablewrap">
 
@@ -582,13 +332,11 @@ Articles
 <thead>
 
 <tr>
-
 <th>Title</th>
 <th>Category</th>
 <th>Status</th>
 <th>Views</th>
 <th>Actions</th>
-
 </tr>
 
 </thead>
@@ -601,37 +349,24 @@ Articles
 
 </div>
 
-
-
-<!-- =========================
-     VIDEOS
-========================= -->
+<!-- VIDEOS -->
 
 <div class="panel">
 
 <div class="section-title">
 
-<h2>
-🎥 Videos
-</h2>
+<h2>🎥 Videos</h2>
 
-<button
-class="btn2 blue"
-id="addVideoTopBtn"
->
+<button class="btn2 blue" id="addVideoTopBtn">
 ＋ Add Video
 </button>
 
 </div>
 
-
 <p style="font-size:12px;color:#687386">
-
 Ka saka video daga nan. Idan ka zaɓi
 <b>Published</b>, zai bayyana a Videos page.
-
 </p>
-
 
 <div class="tablewrap">
 
@@ -640,14 +375,12 @@ Ka saka video daga nan. Idan ka zaɓi
 <thead>
 
 <tr>
-
 <th>Thumbnail</th>
 <th>Title</th>
 <th>Category</th>
 <th>Status</th>
 <th>Views</th>
 <th>Actions</th>
-
 </tr>
 
 </thead>
@@ -660,11 +393,7 @@ Ka saka video daga nan. Idan ka zaɓi
 
 </div>
 
-
-
-<!-- =========================
-     SECURITY
-========================= -->
+<!-- SECURITY -->
 
 <div class="panel">
 
@@ -682,12 +411,8 @@ protected by Row Level Security.
 
 </div>
 
-
 </div>
-
 </div>
-
-
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -695,84 +420,137 @@ protected by Row Level Security.
 
 <script src="supabase-client.js"></script>
 
-
 <script>
 
-let sb,user,articles=[],videos=[];
+let sb = null;
+let user = null;
+let articles = [];
+let videos = [];
 
-const $=id=>document.getElementById(id);
+const $ = id => document.getElementById(id);
 
+function show(message){
 
-/* =========================
-   MESSAGE
-========================= */
-
-function show(t){
-
-$('msg').textContent=t;
-
-$('msg').style.display='block';
+$('msg').textContent = message;
+$('msg').style.display = 'block';
 
 }
 
 function hide(){
 
-$('msg').style.display='none';
+$('msg').style.display = 'none';
 
 }
 
+function esc(value = ''){
+
+return String(value).replace(
+/[&<>'"]/g,
+m => ({
+'&':'&amp;',
+'<':'&lt;',
+'>':'&gt;',
+"'":'&#39;',
+'"':'&quot;'
+}[m])
+);
+
+}
 
 /* =========================
-   INIT
+   INITIALIZE
 ========================= */
 
 async function init(){
 
+try{
+
 if(!window.kardamSupabase){
 
-$('guard').textContent=
-'Supabase is not configured. Add supabase-config.js first.';
+$('guard').textContent =
+'Supabase is not configured.';
 
 return;
 
 }
 
-sb=window.kardamSupabase;
+sb = window.kardamSupabase;
 
-const {data}=await sb.auth.getUser();
+/*
+IMPORTANT:
+Use getSession first so the browser
+can restore the login session.
+*/
 
-user=data.user;
+const {
+data: sessionData,
+error: sessionError
+} = await sb.auth.getSession();
 
-if(!user){
+if(sessionError){
 
-location.href='admin-login.html';
+console.error(sessionError);
+
+$('guard').textContent =
+'Unable to check secure session.';
 
 return;
 
 }
 
+if(!sessionData.session){
 
-const {data:p,error}=await sb
+location.replace('admin-login.html');
+
+return;
+
+}
+
+user = sessionData.session.user;
+
+/* Verify user */
+
+const {
+data: userData,
+error: userError
+} = await sb.auth.getUser();
+
+if(userError || !userData.user){
+
+location.replace('admin-login.html');
+
+return;
+
+}
+
+user = userData.user;
+
+/* Check admin/editor role */
+
+const {
+data: profile,
+error: profileError
+} = await sb
 .from('profiles')
 .select('role')
-.eq('id',user.id)
+.eq('id', user.id)
 .single();
 
-
 if(
-error ||
-!p ||
-!['admin','editor'].includes(p.role)
+profileError ||
+!profile ||
+!['admin','editor'].includes(profile.role)
 ){
 
 await sb.auth.signOut();
 
-location.href='admin-login.html';
+location.replace('admin-login.html');
 
 return;
 
 }
 
+/* Open dashboard */
 
 $('guard').classList.add('hidden');
 
@@ -780,24 +558,33 @@ $('app').classList.remove('hidden');
 
 await load();
 
+}catch(error){
+
+console.error(error);
+
+$('guard').textContent =
+'Dashboard error: ' + error.message;
+
 }
 
+}
 
 /* =========================
-   LOAD EVERYTHING
+   LOAD DATA
 ========================= */
 
 async function load(){
 
+try{
+
 hide();
 
-
 const [
-a,
-c,
-d,
-v
-]=await Promise.all([
+articleResult,
+commentResult,
+adResult,
+videoResult
+] = await Promise.all([
 
 sb
 .from('articles')
@@ -819,126 +606,93 @@ sb
 
 ]);
 
+if(articleResult.error){
 
-if(a.error){
-
-show(a.error.message);
-
+show('Articles error: ' + articleResult.error.message);
 return;
 
 }
 
+if(videoResult.error){
 
-if(v.error){
-
-show(
-'Videos table error: '+v.error.message
-);
-
+show('Videos error: ' + videoResult.error.message);
 return;
 
 }
 
+articles = articleResult.data || [];
+videos = videoResult.data || [];
 
-articles=a.data||[];
-
-videos=v.data||[];
-
-
-$('articleCount').textContent=
+$('articleCount').textContent =
 articles.length;
 
-
-$('viewCount').textContent=
+$('viewCount').textContent =
 articles.reduce(
-(s,x)=>s+(x.views||0),
+(total,item) => total + Number(item.views || 0),
 0
 );
 
+$('commentCount').textContent =
+commentResult.count || 0;
 
-$('commentCount').textContent=
-c.count||0;
+$('adCount').textContent =
+adResult.count || 0;
 
-
-$('adCount').textContent=
-d.count||0;
-
-
-$('videoCount').textContent=
+$('videoCount').textContent =
 videos.length;
 
-
 renderArticles();
-
 renderVideos();
 
-}
+}catch(error){
 
+console.error(error);
 
-/* =========================
-   ESCAPE HTML
-========================= */
-
-function esc(s=''){
-
-return String(s).replace(
-/[&<>'"]/g,
-m=>({
-
-'&':'&amp;',
-'<':'&lt;',
-'>':'&gt;',
-"'":'&#39;',
-'"':'&quot;'
-
-}[m])
-
-);
+show(error.message);
 
 }
 
+}
 
 /* =========================
-   ARTICLES TABLE
+   ARTICLES
 ========================= */
 
 function renderArticles(){
 
-$('rows').innerHTML=
+if(!articles.length){
 
-articles.map(x=>`
+$('rows').innerHTML =
+'<tr><td colspan="5">No articles yet.</td></tr>';
+
+return;
+
+}
+
+$('rows').innerHTML =
+articles.map(article => `
 
 <tr>
 
-<td>
-${esc(x.title)}
-</td>
+<td>${esc(article.title)}</td>
 
-<td>
-${esc(x.category_slug)}
-</td>
+<td>${esc(article.category_slug)}</td>
 
-<td>
-${esc(x.status)}
-</td>
+<td>${esc(article.status)}</td>
 
-<td>
-${x.views||0}
-</td>
+<td>${Number(article.views || 0)}</td>
 
 <td class="row-actions">
 
 <button
 class="btn2"
-onclick="editArticle(${x.id})"
->
+onclick="editArticle(${article.id})">
 Edit
 </button>
 
 <button
 class="btn2 danger"
-onclick="deleteArticle(${x.id})"
->
+onclick="deleteArticle(${article.id})">
 Delete
 </button>
 
@@ -946,84 +700,221 @@ Delete
 
 </tr>
 
-`).join('')
-
-||
-
-'<tr><td colspan="5">No articles yet.</td></tr>';
+`).join('');
 
 }
 
+function openEditor(article){
+
+$('editor').classList.remove('hidden');
+
+$('editorTitle').textContent =
+article ? 'Edit Article' : 'New Article';
+
+$('articleId').value =
+article?.id || '';
+
+$('title').value =
+article?.title || '';
+
+$('slug').value =
+article?.slug || '';
+
+$('category').value =
+article?.category_slug || 'education';
+
+$('excerpt').value =
+article?.excerpt || '';
+
+$('content').value =
+article?.content || '';
+
+$('imageUrl').value =
+article?.image_url || '';
+
+$('status').value =
+article?.status || 'draft';
+
+window.scrollTo({
+top:0,
+behavior:'smooth'
+});
+
+}
+
+window.editArticle = function(id){
+
+const article =
+articles.find(item => item.id === id);
+
+openEditor(article);
+
+};
+
+window.deleteArticle = async function(id){
+
+if(!confirm('Delete this article?')) return;
+
+const {error} =
+await sb
+.from('articles')
+.delete()
+.eq('id',id);
+
+if(error){
+
+show(error.message);
+return;
+
+}
+
+await load();
+
+};
+
+$('newBtn').onclick = function(){
+
+openEditor();
+
+};
+
+$('cancelBtn').onclick = function(){
+
+$('editor').classList.add('hidden');
+
+};
 
 /* =========================
-   VIDEO TABLE
+   SAVE ARTICLE
+========================= */
+
+$('articleForm').onsubmit =
+async function(event){
+
+event.preventDefault();
+
+hide();
+
+const cleanSlug =
+$('slug').value
+.trim()
+.toLowerCase()
+.replace(/[^a-z0-9-]+/g,'-')
+.replace(/^-+|-+$/g,'');
+
+const payload = {
+
+title:$('title').value.trim(),
+
+slug:cleanSlug,
+
+category_slug:$('category').value,
+
+excerpt:$('excerpt').value.trim(),
+
+content:$('content').value.trim(),
+
+image_url:
+$('imageUrl').value.trim() || null,
+
+status:$('status').value,
+
+author_id:user.id
+
+};
+
+const id =
+$('articleId').value;
+
+let result;
+
+if(id){
+
+result =
+await sb
+.from('articles')
+.update(payload)
+.eq('id',id);
+
+}else{
+
+result =
+await sb
+.from('articles')
+.insert(payload);
+
+}
+
+if(result.error){
+
+show(result.error.message);
+return;
+
+}
+
+show('Article saved successfully.');
+
+$('editor').classList.add('hidden');
+
+await load();
+
+};
+
+/* =========================
+   VIDEOS
 ========================= */
 
 function renderVideos(){
 
-$('videoRows').innerHTML=
+if(!videos.length){
 
-videos.map(x=>`
+$('videoRows').innerHTML =
+'<tr><td colspan="6">No videos yet.</td></tr>';
+
+return;
+
+}
+
+$('videoRows').innerHTML =
+videos.map(video => `
 
 <tr>
 
 <td>
 
 ${
-x.thumbnail_url
-
+video.thumbnail_url
 ?
-
 `<img
 class="video-thumb"
-src="${esc(x.thumbnail_url)}"
+src="${esc(video.thumbnail_url)}"
 alt=""
-loading="lazy"
->`
-
+loading="lazy">`
 :
-
 '—'
-
 }
 
 </td>
 
+<td>${esc(video.title)}</td>
 
-<td>
-${esc(x.title)}
-</td>
+<td>${esc(video.category_slug)}</td>
 
+<td>${esc(video.status)}</td>
 
-<td>
-${esc(x.category_slug)}
-</td>
-
-
-<td>
-${esc(x.status)}
-</td>
-
-
-<td>
-${x.views||0}
-</td>
-
+<td>${Number(video.views || 0)}</td>
 
 <td class="row-actions">
 
 <button
 class="btn2"
-onclick="editVideo(${x.id})"
->
+onclick="editVideo(${video.id})">
 Edit
 </button>
 
-
 <button
 class="btn2 danger"
-onclick="deleteVideo(${x.id})"
->
+onclick="deleteVideo(${video.id})">
 Delete
 </button>
 
@@ -1031,58 +922,37 @@ Delete
 
 </tr>
 
-`).join('')
-
-||
-
-'<tr><td colspan="6">No videos yet.</td></tr>';
+`).join('');
 
 }
 
+function openVideoEditor(video){
 
-/* =========================
-   ARTICLE EDITOR
-========================= */
+$('videoEditor').classList.remove('hidden');
 
-function openEditor(x){
+$('videoEditorTitle').textContent =
+video ? 'Edit Video' : 'Add Video';
 
-$('editor').classList.remove('hidden');
+$('videoId').value =
+video?.id || '';
 
-$('editorTitle').textContent=
-x?'Edit Article':'New Article';
+$('videoTitle').value =
+video?.title || '';
 
+$('videoUrl').value =
+video?.video_url || '';
 
-$('articleId').value=
-x?.id||'';
+$('videoDescription').value =
+video?.description || '';
 
+$('videoThumbnail').value =
+video?.thumbnail_url || '';
 
-$('title').value=
-x?.title||'';
+$('videoCategory').value =
+video?.category_slug || 'news';
 
-
-$('slug').value=
-x?.slug||'';
-
-
-$('category').value=
-x?.category_slug||'education';
-
-
-$('excerpt').value=
-x?.excerpt||'';
-
-
-$('content').value=
-x?.content||'';
-
-
-$('imageUrl').value=
-x?.image_url||'';
-
-
-$('status').value=
-x?.status||'draft';
-
+$('videoStatus').value =
+video?.status || 'draft';
 
 window.scrollTo({
 top:0,
@@ -1091,185 +961,156 @@ behavior:'smooth'
 
 }
 
+window.editVideo = function(id){
 
-window.editArticle=id=>
-openEditor(
-articles.find(x=>x.id===id)
-);
+const video =
+videos.find(item => item.id === id);
 
-
-window.deleteArticle=
-async id=>{
-
-if(!confirm(
-'Delete this article?'
-)) return;
-
-
-const {error}=await sb
-.from('articles')
-.delete()
-.eq('id',id);
-
-
-if(error){
-
-show(error.message);
-
-}else{
-
-await load();
-
-}
+openVideoEditor(video);
 
 };
 
+window.deleteVideo = async function(id){
 
-/* =========================
-   VIDEO EDITOR
-========================= */
+if(!confirm('Delete this video?')) return;
 
-function openVideoEditor(x){
-
-$('videoEditor').classList.remove(
-'hidden'
-);
-
-$('videoEditorTitle').textContent=
-x?'Edit Video':'Add Video';
-
-
-$('videoId').value=
-x?.id||'';
-
-
-$('videoTitle').value=
-x?.title||'';
-
-
-$('videoUrl').value=
-x?.video_url||'';
-
-
-$('videoDescription').value=
-x?.description||'';
-
-
-$('videoThumbnail').value=
-x?.thumbnail_url||'';
-
-
-$('videoCategory').value=
-x?.category_slug||'news';
-
-
-$('videoStatus').value=
-x?.status||'draft';
-
-
-window.scrollTo({
-top:0,
-behavior:'smooth'
-});
-
-}
-
-
-window.editVideo=id=>
-openVideoEditor(
-videos.find(x=>x.id===id)
-);
-
-
-window.deleteVideo=
-async id=>{
-
-if(!confirm(
-'Delete this video?'
-)) return;
-
-
-const {error}=await sb
+const {error} =
+await sb
 .from('videos')
 .delete()
 .eq('id',id);
 
-
 if(error){
 
 show(error.message);
-
-}else{
-
-await load();
+return;
 
 }
 
+await load();
+
 };
 
+$('newVideoBtn').onclick = function(){
 
-/* =========================
-   ARTICLE BUTTONS
-========================= */
-
-$('newBtn').onclick=()=>
-openEditor();
-
-
-$('cancelBtn').onclick=()=>
-$('editor').classList.add('hidden');
-
-
-/* =========================
-   VIDEO BUTTONS
-========================= */
-
-$('newVideoBtn').onclick=()=>
 openVideoEditor();
 
+};
 
-$('addVideoTopBtn').onclick=()=>
+$('addVideoTopBtn').onclick = function(){
+
 openVideoEditor();
 
+};
 
-$('cancelVideoBtn').onclick=()=>
+$('cancelVideoBtn').onclick = function(){
+
 $('videoEditor').classList.add('hidden');
 
+};
+
+/* =========================
+   SAVE VIDEO
+========================= */
+
+$('videoForm').onsubmit =
+async function(event){
+
+event.preventDefault();
+
+hide();
+
+const payload = {
+
+title:
+$('videoTitle').value.trim(),
+
+description:
+$('videoDescription').value.trim() || null,
+
+video_url:
+$('videoUrl').value.trim(),
+
+thumbnail_url:
+$('videoThumbnail').value.trim() || null,
+
+category_slug:
+$('videoCategory').value,
+
+status:
+$('videoStatus').value,
+
+author_id:user.id
+
+};
+
+const id =
+$('videoId').value;
+
+let result;
+
+if(id){
+
+result =
+await sb
+.from('videos')
+.update(payload)
+.eq('id',id);
+
+}else{
+
+result =
+await sb
+.from('videos')
+.insert(payload);
+
+}
+
+if(result.error){
+
+show(result.error.message);
+return;
+
+}
+
+show('Video saved successfully.');
+
+$('videoEditor').classList.add('hidden');
+
+await load();
+
+};
 
 /* =========================
    REFRESH
 ========================= */
 
-$('refreshBtn').onclick=load;
-
+$('refreshBtn').onclick = load;
 
 /* =========================
    LOGOUT
 ========================= */
 
-$('logout').onclick=
-async()=>{
+$('logout').onclick =
+async function(){
+
+if(sb){
 
 await sb.auth.signOut();
 
-location.href='admin-login.html';
+}
+
+location.replace('admin-login.html');
 
 };
 
-
 /* =========================
-   SAVE ARTICLE
+   START
 ========================= */
 
-$('articleForm').onsubmit=
-async e=>{
+init();
 
-e.preventDefault();
+</script>
 
-hide();
-
-
-const payload={
-
-title:
-$('
+</body>
+</html>
