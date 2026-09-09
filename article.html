@@ -16,6 +16,7 @@ href="https://officialsalah001.github.io/kardam-writes/article.html">
 <link rel="stylesheet" href="style.css">
 
 <style>
+
 .articlePage{
   width:min(850px,92%);
   margin:60px auto;
@@ -74,7 +75,10 @@ href="https://officialsalah001.github.io/kardam-writes/article.html">
   color:#0b1730;
 }
 
-/* COMMENTS */
+
+/* =========================
+   COMMENTS
+========================= */
 
 .comments{
   margin-top:45px;
@@ -188,7 +192,10 @@ href="https://officialsalah001.github.io/kardam-writes/article.html">
   font-size:13px;
 }
 
-/* Hidden anti-spam field */
+
+/* =========================
+   HIDDEN ANTI-SPAM
+========================= */
 
 .honeypot{
   position:absolute!important;
@@ -198,7 +205,10 @@ href="https://officialsalah001.github.io/kardam-writes/article.html">
   overflow:hidden!important;
 }
 
-/* IMAGE FALLBACK */
+
+/* =========================
+   IMAGE FALLBACK
+========================= */
 
 .articleImageFallback{
   width:100%;
@@ -215,7 +225,10 @@ href="https://officialsalah001.github.io/kardam-writes/article.html">
   letter-spacing:2px;
 }
 
-/* MOBILE */
+
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:600px){
 
@@ -241,10 +254,13 @@ href="https://officialsalah001.github.io/kardam-writes/article.html">
 }
 
 }
+
 </style>
 </head>
 
+
 <body>
+
 
 <header>
 
@@ -283,7 +299,9 @@ Loading article...
 </main>
 
 
-<!-- SUPABASE -->
+<!-- =========================
+     SUPABASE
+========================= -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -661,7 +679,8 @@ viewResult.data !== undefined
 ){
 
 viewElement.textContent =
-viewResult.data;
+Number(viewResult.data)
+.toLocaleString();
 
 }
 
@@ -728,7 +747,7 @@ box.innerHTML =
 
 "Ka bar ra’ayinka a kasa. "+
 
-"Comments masu amfani suna taimaka wajen gina al’umma."
+"Comment ɗinka zai bayyana kai tsaye bayan ka tura shi."
 
 +"</p>"+
 
@@ -889,7 +908,7 @@ document.getElementById(
 
 
 /* =========================
-   LOAD APPROVED COMMENTS
+   LOAD COMMENTS
 ========================= */
 
 async function loadComments(){
@@ -946,12 +965,15 @@ const comments =
 result.data || [];
 
 
-/* COMMENT COUNT */
+/* =========================
+   COMMENT COUNT
+========================= */
 
 if(countElement){
 
 countElement.textContent =
-comments.length;
+comments.length
+.toLocaleString();
 
 }
 
@@ -961,7 +983,7 @@ if(!comments.length){
 list.innerHTML =
 '<div class="emptyComments">'+
 
-"No approved comments yet. Be the first to comment!"+
+"No comments yet. Be the first to comment!"+
 
 "</div>";
 
@@ -970,7 +992,9 @@ return;
 }
 
 
-/* RENDER COMMENTS */
+/* =========================
+   RENDER COMMENTS
+========================= */
 
 list.innerHTML =
 comments.map(function(c){
@@ -1035,6 +1059,7 @@ e.preventDefault();
 status.textContent =
 "";
 
+
 status.style.color =
 "";
 
@@ -1051,7 +1076,9 @@ const body =
 textInput.value.trim();
 
 
-/* HONEYPOT */
+/* =========================
+   HONEYPOT
+========================= */
 
 if(
 spamInput.value.trim() !== ""
@@ -1065,7 +1092,9 @@ return;
 }
 
 
-/* NAME */
+/* =========================
+   NAME VALIDATION
+========================= */
 
 if(name.length < 2){
 
@@ -1087,7 +1116,9 @@ return;
 }
 
 
-/* EMAIL */
+/* =========================
+   EMAIL VALIDATION
+========================= */
 
 if(email.length > 120){
 
@@ -1112,7 +1143,9 @@ return;
 }
 
 
-/* COMMENT */
+/* =========================
+   COMMENT VALIDATION
+========================= */
 
 if(body.length < 2){
 
@@ -1134,7 +1167,9 @@ return;
 }
 
 
-/* BUTTON */
+/* =========================
+   BUTTON
+========================= */
 
 button.disabled =
 true;
@@ -1144,10 +1179,12 @@ button.textContent =
 
 
 status.textContent =
-"Submitting your comment...";
+"Posting your comment...";
 
 
-/* INSERT */
+/* =========================
+   INSERT DIRECTLY
+========================= */
 
 try{
 
@@ -1163,13 +1200,19 @@ name:
 name,
 
 email:
-email || null,
+email ||
+null,
 
 body:
 body,
 
+/*
+IMPORTANT:
+Comment is approved immediately.
+*/
+
 status:
-"pending"
+"approved"
 
 });
 
@@ -1184,25 +1227,31 @@ result.error
 status.textContent =
 "An samu matsala wajen posting comment. Please try again.";
 
+status.style.color =
+"#a33";
+
 return;
 
 }
 
 
-/* SUCCESS */
-
-form.reset();
-
+/* =========================
+   SUCCESS
+========================= */
 
 status.textContent =
-"✅ Comment submitted successfully. It will appear after approval.";
-
+"✅ Comment posted successfully!";
 
 status.style.color =
 "#16803c";
 
 
-/* Reload */
+/* Clear form */
+
+form.reset();
+
+
+/* Reload comments immediately */
 
 await loadComments();
 
@@ -1217,6 +1266,9 @@ error
 status.textContent =
 "Unable to post comment right now.";
 
+status.style.color =
+"#a33";
+
 }finally{
 
 button.disabled =
@@ -1230,7 +1282,9 @@ button.textContent =
 });
 
 
-/* INITIAL COMMENTS */
+/* =========================
+   INITIAL COMMENTS
+========================= */
 
 await loadComments();
 
