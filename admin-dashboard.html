@@ -158,13 +158,27 @@ Refresh
 <div class="field">
 <label>CATEGORY</label>
 
+<!-- 9 WEBSITE CATEGORIES -->
+
 <select id="category" required>
 
-<option value="education">Ilimi / Education</option>
-<option value="history">Tarihi / History</option>
-<option value="lifestyle">Rayuwa / Lifestyle</option>
-<option value="technology">Fasaha / Technology</option>
-<option value="business">Business / Kasuwanci</option>
+<option value="news">📰 News / Labarai</option>
+
+<option value="politics">🏛️ Politics / Siyasa</option>
+
+<option value="sports">⚽ Sports / Wasanni</option>
+
+<option value="education">📚 Ilimi / Education</option>
+
+<option value="history">📜 Tarihi / History</option>
+
+<option value="lifestyle">🌍 Rayuwa / Lifestyle</option>
+
+<option value="technology">💻 Fasaha / Technology</option>
+
+<option value="business">💼 Business / Kasuwanci</option>
+
+<option value="opinion">💭 Opinion / Ra'ayi</option>
 
 </select>
 
@@ -189,8 +203,11 @@ Refresh
 <label>STATUS</label>
 
 <select id="status">
+
 <option value="draft">Draft</option>
+
 <option value="published">Published</option>
+
 </select>
 
 </div>
@@ -274,12 +291,23 @@ placeholder="https://...">
 <select id="videoCategory">
 
 <option value="news">News / Labarai</option>
+
 <option value="politics">Politics / Siyasa</option>
-<option value="sports">Sports / Kwallo</option>
+
+<option value="sports">Sports / Wasanni</option>
+
 <option value="technology">Technology / Fasaha</option>
+
 <option value="education">Education / Ilimi</option>
+
+<option value="history">History / Tarihi</option>
+
 <option value="lifestyle">Lifestyle / Rayuwa</option>
+
 <option value="business">Business / Kasuwanci</option>
+
+<option value="opinion">Opinion / Ra'ayi</option>
+
 <option value="interviews">Interviews / Hirarraki</option>
 
 </select>
@@ -293,6 +321,7 @@ placeholder="https://...">
 <select id="videoStatus">
 
 <option value="draft">Draft</option>
+
 <option value="published">Published</option>
 
 </select>
@@ -322,7 +351,9 @@ Cancel
 <div class="panel">
 
 <div class="section-title">
+
 <h2>Articles</h2>
+
 </div>
 
 <div class="tablewrap">
@@ -332,11 +363,17 @@ Cancel
 <thead>
 
 <tr>
+
 <th>Title</th>
+
 <th>Category</th>
+
 <th>Status</th>
+
 <th>Views</th>
+
 <th>Actions</th>
+
 </tr>
 
 </thead>
@@ -364,8 +401,10 @@ Cancel
 </div>
 
 <p style="font-size:12px;color:#687386">
+
 Ka saka video daga nan. Idan ka zaɓi
 <b>Published</b>, zai bayyana a Videos page.
+
 </p>
 
 <div class="tablewrap">
@@ -375,12 +414,19 @@ Ka saka video daga nan. Idan ka zaɓi
 <thead>
 
 <tr>
+
 <th>Thumbnail</th>
+
 <th>Title</th>
+
 <th>Category</th>
+
 <th>Status</th>
+
 <th>Views</th>
+
 <th>Actions</th>
+
 </tr>
 
 </thead>
@@ -432,6 +478,7 @@ const $ = id => document.getElementById(id);
 function show(message){
 
 $('msg').textContent = message;
+
 $('msg').style.display = 'block';
 
 }
@@ -454,6 +501,40 @@ m => ({
 '"':'&quot;'
 }[m])
 );
+
+}
+
+/* =========================
+   CATEGORY LABELS
+========================= */
+
+function categoryLabel(category){
+
+const labels = {
+
+news:'📰 News / Labarai',
+
+politics:'🏛️ Politics / Siyasa',
+
+sports:'⚽ Sports / Wasanni',
+
+education:'📚 Ilimi / Education',
+
+history:'📜 Tarihi / History',
+
+lifestyle:'🌍 Rayuwa / Lifestyle',
+
+technology:'💻 Fasaha / Technology',
+
+business:'💼 Business / Kasuwanci',
+
+opinion:'💭 Opinion / Ra\'ayi',
+
+interviews:'🎤 Interviews / Hirarraki'
+
+};
+
+return labels[category] || category || 'Article';
 
 }
 
@@ -580,10 +661,15 @@ try{
 hide();
 
 const [
+
 articleResult,
+
 commentResult,
+
 adResult,
+
 videoResult
+
 ] = await Promise.all([
 
 sb
@@ -608,27 +694,39 @@ sb
 
 if(articleResult.error){
 
-show('Articles error: ' + articleResult.error.message);
+show(
+'Articles error: ' +
+articleResult.error.message
+);
+
 return;
 
 }
 
 if(videoResult.error){
 
-show('Videos error: ' + videoResult.error.message);
+show(
+'Videos error: ' +
+videoResult.error.message
+);
+
 return;
 
 }
 
-articles = articleResult.data || [];
-videos = videoResult.data || [];
+articles =
+articleResult.data || [];
+
+videos =
+videoResult.data || [];
 
 $('articleCount').textContent =
 articles.length;
 
 $('viewCount').textContent =
 articles.reduce(
-(total,item) => total + Number(item.views || 0),
+(total,item) =>
+total + Number(item.views || 0),
 0
 );
 
@@ -642,6 +740,7 @@ $('videoCount').textContent =
 videos.length;
 
 renderArticles();
+
 renderVideos();
 
 }catch(error){
@@ -670,30 +769,43 @@ return;
 }
 
 $('rows').innerHTML =
+
 articles.map(article => `
 
 <tr>
 
-<td>${esc(article.title)}</td>
+<td>
+${esc(article.title)}
+</td>
 
-<td>${esc(article.category_slug)}</td>
+<td>
+${esc(categoryLabel(article.category_slug))}
+</td>
 
-<td>${esc(article.status)}</td>
+<td>
+${esc(article.status)}
+</td>
 
-<td>${Number(article.views || 0)}</td>
+<td>
+${Number(article.views || 0)}
+</td>
 
 <td class="row-actions">
 
 <button
 class="btn2"
 onclick="editArticle(${article.id})">
+
 Edit
+
 </button>
 
 <button
 class="btn2 danger"
 onclick="deleteArticle(${article.id})">
+
 Delete
+
 </button>
 
 </td>
@@ -721,7 +833,7 @@ $('slug').value =
 article?.slug || '';
 
 $('category').value =
-article?.category_slug || 'education';
+article?.category_slug || 'news';
 
 $('excerpt').value =
 article?.excerpt || '';
@@ -736,8 +848,11 @@ $('status').value =
 article?.status || 'draft';
 
 window.scrollTo({
+
 top:0,
+
 behavior:'smooth'
+
 });
 
 }
@@ -764,6 +879,7 @@ await sb
 if(error){
 
 show(error.message);
+
 return;
 
 }
@@ -804,22 +920,29 @@ $('slug').value
 
 const payload = {
 
-title:$('title').value.trim(),
+title:
+$('title').value.trim(),
 
-slug:cleanSlug,
+slug:
+cleanSlug,
 
-category_slug:$('category').value,
+category_slug:
+$('category').value,
 
-excerpt:$('excerpt').value.trim(),
+excerpt:
+$('excerpt').value.trim(),
 
-content:$('content').value.trim(),
+content:
+$('content').value.trim(),
 
 image_url:
 $('imageUrl').value.trim() || null,
 
-status:$('status').value,
+status:
+$('status').value,
 
-author_id:user.id
+author_id:
+user.id
 
 };
 
@@ -848,6 +971,7 @@ await sb
 if(result.error){
 
 show(result.error.message);
+
 return;
 
 }
@@ -876,6 +1000,7 @@ return;
 }
 
 $('videoRows').innerHTML =
+
 videos.map(video => `
 
 <tr>
@@ -884,38 +1009,56 @@ videos.map(video => `
 
 ${
 video.thumbnail_url
+
 ?
+
 `<img
 class="video-thumb"
 src="${esc(video.thumbnail_url)}"
 alt=""
-loading="lazy">`
+loading="lazy"
+onerror="this.style.display='none'">`
+
 :
+
 '—'
+
 }
 
 </td>
 
-<td>${esc(video.title)}</td>
+<td>
+${esc(video.title)}
+</td>
 
-<td>${esc(video.category_slug)}</td>
+<td>
+${esc(categoryLabel(video.category_slug))}
+</td>
 
-<td>${esc(video.status)}</td>
+<td>
+${esc(video.status)}
+</td>
 
-<td>${Number(video.views || 0)}</td>
+<td>
+${Number(video.views || 0)}
+</td>
 
 <td class="row-actions">
 
 <button
 class="btn2"
 onclick="editVideo(${video.id})">
+
 Edit
+
 </button>
 
 <button
 class="btn2 danger"
 onclick="deleteVideo(${video.id})">
+
 Delete
+
 </button>
 
 </td>
@@ -955,8 +1098,11 @@ $('videoStatus').value =
 video?.status || 'draft';
 
 window.scrollTo({
+
 top:0,
+
 behavior:'smooth'
+
 });
 
 }
@@ -983,6 +1129,7 @@ await sb
 if(error){
 
 show(error.message);
+
 return;
 
 }
@@ -1040,7 +1187,8 @@ $('videoCategory').value,
 status:
 $('videoStatus').value,
 
-author_id:user.id
+author_id:
+user.id
 
 };
 
@@ -1069,6 +1217,7 @@ await sb
 if(result.error){
 
 show(result.error.message);
+
 return;
 
 }
