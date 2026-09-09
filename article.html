@@ -8,6 +8,9 @@
 
 <meta name="description" content="Read articles from Hamza S.S Kardam Writes.">
 <meta name="robots" content="index,follow">
+<meta name="theme-color" content="#0b1730">
+
+<link rel="canonical" href="https://officialsalah001.github.io/kardam-writes/article.html">
 
 <link rel="stylesheet" href="style.css">
 
@@ -20,12 +23,14 @@
 .articleMeta{
   color:#687386;
   font-size:12px;
+  margin-bottom:10px;
 }
 
 .articleContent{
   font-size:18px;
   line-height:1.9;
   white-space:pre-wrap;
+  word-wrap:break-word;
 }
 
 .articleHero{
@@ -41,6 +46,13 @@
   margin-bottom:15px;
 }
 
+.articleExcerpt{
+  font-size:17px;
+  line-height:1.7;
+  color:#4b5563;
+  margin:15px 0 25px;
+}
+
 /* COMMENTS */
 .comments{
   margin-top:45px;
@@ -50,6 +62,11 @@
 
 .comments h2{
   margin-bottom:8px;
+}
+
+.commentIntro{
+  color:#687386;
+  line-height:1.6;
 }
 
 .commentForm{
@@ -72,6 +89,13 @@
   border:1px solid #d9dde5;
   border-radius:8px;
   font:inherit;
+  background:#fff;
+}
+
+.commentForm input:focus,
+.commentForm textarea:focus{
+  outline:2px solid #d7aa55;
+  border-color:#d7aa55;
 }
 
 .commentForm textarea{
@@ -90,8 +114,14 @@
   cursor:pointer;
 }
 
+.commentForm button:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
+
 .commentStatus{
   font-size:13px;
+  line-height:1.5;
 }
 
 .commentList{
@@ -120,6 +150,7 @@
 .commentText{
   white-space:pre-wrap;
   line-height:1.65;
+  word-wrap:break-word;
 }
 
 .emptyComments{
@@ -127,13 +158,21 @@
   font-size:14px;
 }
 
+.commentError{
+  padding:12px;
+  border-radius:8px;
+  background:#fff3f3;
+  color:#8b1e1e;
+  font-size:13px;
+}
+
 /* Anti-spam hidden field */
 .honeypot{
-  position:absolute;
-  left:-9999px;
-  width:1px;
-  height:1px;
-  overflow:hidden;
+  position:absolute!important;
+  left:-9999px!important;
+  width:1px!important;
+  height:1px!important;
+  overflow:hidden!important;
 }
 </style>
 </head>
@@ -175,8 +214,7 @@ Loading article...
 <script src="supabase-client.js"></script>
 
 <script>
-
-(async function(){
+(function(){
 
 const state=document.getElementById("state");
 
@@ -185,26 +223,53 @@ window.location.search
 ).get("id");
 
 if(!id){
-
 state.innerHTML=
 "<h2>Article not found</h2>"+
 "<p>No article was selected.</p>";
-
 return;
 }
 
 if(!window.kardamSupabase){
-
 state.innerHTML=
 "<h2>Connection error</h2>"+
 "<p>Database connection is unavailable.</p>";
-
 return;
 }
 
-try{
-
 const sb=window.kardamSupabase;
+
+function esc(value=""){
+return String(value).replace(/[&<>'"]/g,function(m){
+return {
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+"'":"&#39;",
+'"':"&quot;"
+}[m];
+});
+}
+
+function formatDate(date){
+if(!date) return "";
+
+try{
+return new Date(date).toLocaleDateString(
+"en-US",
+{
+year:"numeric",
+month:"long",
+day:"numeric"
+}
+);
+}catch(e){
+return "";
+}
+}
+
+async function loadArticle(){
+
+try{
 
 const result=await sb
 .from("articles")
@@ -241,41 +306,49 @@ document.title=
 
 const description=
 String(a.excerpt||a.content||"")
+.replace(/\s+/g," ")
 .substring(0,155);
 
-document
-.querySelector('meta[name="description"]')
-.content=description;
+const metaDescription=
+document.querySelector(
+'meta[name="description"]'
+);
+
+if(metaDescription){
+metaDescription.content=description;
+}
 
 state.innerHTML=
 
 '<div class="articleMeta">'+
 esc(a.category_slug||"Article")+
 " · "+
-new Date(a.created_at).toLocaleDateString()+
+formatDate(a.created_at)+
 "</div>"+
 
 "<h1>"+
 esc(a.title||"Untitled Article")+
 "</h1>"+
 
-(a.image_url ?
-
+(a.image_url
+?
 '<img class="articleHero" src="'+
 esc(a.image_url)+
 '" alt="'+
 esc(a.title||"Article")+
-'">'
+'" loading="eager">'
+:
+""
+)+
 
-:"")+
-
-(a.excerpt ?
-
-"<p>"+
+(a.excerpt
+?
+'<p class="articleExcerpt">'+
 esc(a.excerpt)+
 "</p>"
-
-:"")+
+:
+""
+)+
 
 '<div class="articleContent">'+
 esc(a.content||"")+
@@ -283,7 +356,7 @@ esc(a.content||"")+
 
 '<p class="articleMeta">'+
 "Views: <span id=\"views\">"+
-(a.views||0)+
+esc(a.views||0)+
 "</span>"+
 "</p>";
 
@@ -298,11 +371,14 @@ article_id:Number(id)
 }
 );
 
-if(view.data!==null){
+if(
+!view.error &&
+view.data!==null &&
+document.getElementById("views")
+){
 
-document.getElementById(
-"views"
-).textContent=view.data;
+document.getElementById("views").textContent=
+view.data;
 
 }
 
@@ -317,7 +393,7 @@ viewError
 
 /* COMMENTS */
 
-renderComments(
+await renderComments(
 sb,
 Number(id)
 );
@@ -335,17 +411,18 @@ state.innerHTML=
 
 }
 
+}
 
-/* COMMENTS FUNCTION */
+/* =========================
+   COMMENTS
+========================= */
 
 async function renderComments(
 sb,
 articleId
 ){
 
-const box=document.createElement(
-"section"
-);
+const box=document.createElement("section");
 
 box.className="comments";
 
@@ -353,10 +430,10 @@ box.innerHTML=
 
 '<h2>💬 Comments / Ra’ayoyi</h2>'+
 
-'<p>'+
+'<p class="commentIntro">'+
 "Ka bar ra’ayinka a kasa. "+
-"Comments masu amfani suna taimaka wajen gina al’umma."+
-"</p>"+
+"Comments masu amfani suna taimaka wajen gina al’umma."
++"</p>"+
 
 '<form class="commentForm" id="commentForm">'+
 
@@ -368,7 +445,8 @@ box.innerHTML=
 'maxlength="60" '+
 'minlength="2" '+
 'required '+
-'autocomplete="name">'+
+'autocomplete="name" '+
+'placeholder="Your name">'+
 '</label>'+
 
 '<label>'+
@@ -377,7 +455,8 @@ box.innerHTML=
 'id="commentText" '+
 'maxlength="1000" '+
 'minlength="2" '+
-'required>'+
+'required '+
+'placeholder="Rubuta ra’ayinka a nan...">'+
 '</textarea>'+
 '</label>'+
 
@@ -389,7 +468,7 @@ box.innerHTML=
 'autocomplete="off">'+
 '</label>'+
 
-'<button type="submit">'+
+'<button type="submit" id="commentButton">'+
 "Post Comment"+
 "</button>"+
 
@@ -397,33 +476,50 @@ box.innerHTML=
 
 "</form>"+
 
-'<div class="commentList" id="commentList"></div>';
+'<div class="commentList" id="commentList">'+
+'<div class="emptyComments">Loading comments...</div>'+
+"</div>";
 
-document
-.querySelector(".articlePage")
-.appendChild(box);
+state.appendChild(box);
 
-const list=
-document.getElementById(
-"commentList"
+const form=document.getElementById(
+"commentForm"
 );
 
-const status=
-document.getElementById(
+const nameInput=document.getElementById(
+"commentName"
+);
+
+const textInput=document.getElementById(
+"commentText"
+);
+
+const spamInput=document.getElementById(
+"website"
+);
+
+const button=document.getElementById(
+"commentButton"
+);
+
+const status=document.getElementById(
 "commentStatus"
 );
 
+const list=document.getElementById(
+"commentList"
+);
 
 /* LOAD COMMENTS */
 
 async function loadComments(){
 
 list.innerHTML=
-'<div class="emptyComments">'+
-"Loading comments..."+
-"</div>";
+'<div class="emptyComments">Loading comments...</div>';
 
-const r=await sb
+try{
+
+const result=await sb
 .from("comments")
 .select(
 "id,article_id,name,comment,created_at"
@@ -436,179 +532,204 @@ ascending:false
 }
 );
 
-if(r.error){
+if(result.error){
 
-console.error(r.error);
+console.error(
+"Comments load error:",
+result.error
+);
 
 list.innerHTML=
-'<div class="emptyComments">'+
-"Comments ba su samu damar lodawa yanzu."+
+'<div class="commentError">'+
+"Comments ba su samu connection da database ba a yanzu."+
 "</div>";
 
 return;
 }
 
-if(
-!r.data||
-!r.data.length
-){
+const comments=result.data||[];
+
+if(!comments.length){
 
 list.innerHTML=
 '<div class="emptyComments">'+
-"Babu comment tukuna. Ka zama na farko."+
+"No comments yet. Be the first to comment!"+
 "</div>";
 
 return;
 }
 
-list.innerHTML=
+list.innerHTML=comments.map(function(c){
 
-r.data.map(
-c =>
+return (
 
 '<article class="commentItem">'+
 
 "<strong>"+
-esc(c.name)+
+esc(c.name||"Anonymous")+
 "</strong>"+
 
 '<div class="commentDate">'+
-new Date(
-c.created_at
-).toLocaleString()+
+formatDate(c.created_at)+
 "</div>"+
 
 '<div class="commentText">'+
-esc(c.comment)+
+esc(c.comment||"")+
 "</div>"+
 
 "</article>"
 
-).join("");
+);
+
+}).join("");
+
+}catch(error){
+
+console.error(
+"Comments error:",
+error
+);
+
+list.innerHTML=
+'<div class="commentError">'+
+"Unable to load comments right now."+
+"</div>";
 
 }
 
+}
 
 /* POST COMMENT */
 
-document
-.getElementById("commentForm")
-.onsubmit=async function(e){
+form.addEventListener(
+"submit",
+async function(e){
 
 e.preventDefault();
 
 status.textContent="";
+status.style.color="";
 
-const name=
-document
-.getElementById("commentName")
-.value
-.trim();
+const name=nameInput.value.trim();
+const comment=textInput.value.trim();
 
-const comment=
-document
-.getElementById("commentText")
-.value
-.trim();
+/* Honeypot */
 
-const website=
-document
-.getElementById("website")
-.value;
-
-if(website){
+if(spamInput.value.trim()!==""){
 
 status.textContent=
-"An hana spam comment.";
+"Comment could not be submitted.";
 
 return;
 }
 
-if(
-name.length<2||
-name.length>60||
-comment.length<2||
-comment.length>1000
-){
+/* Validation */
+
+if(name.length<2){
 
 status.textContent=
-"Please check your name and comment length.";
+"Please enter your name.";
 
 return;
 }
 
+if(name.length>60){
+
 status.textContent=
+"Name is too long.";
+
+return;
+}
+
+if(comment.length<2){
+
+status.textContent=
+"Please write a comment.";
+
+return;
+}
+
+if(comment.length>1000){
+
+status.textContent=
+"Comment is too long.";
+
+return;
+}
+
+button.disabled=true;
+button.textContent=
 "Posting...";
 
-const r=await sb
+status.textContent=
+"Submitting your comment...";
+
+try{
+
+const result=await sb
 .from("comments")
 .insert({
-
 article_id:articleId,
-
 name:name,
-
 comment:comment
-
 });
 
-if(r.error){
+if(result.error){
 
-console.error(r.error);
+console.error(
+"Comment insert error:",
+result.error
+);
 
 status.textContent=
-"Ba a iya aika comment ba. "+
-"Ka tabbatar comments table/RLS na Supabase sun ba public damar INSERT.";
+"An samu matsala wajen posting comment. Please try again.";
 
 return;
 }
 
-document
-.getElementById("commentName")
-.value="";
+/* SUCCESS */
 
-document
-.getElementById("commentText")
-.value="";
+form.reset();
 
 status.textContent=
-"An aika comment successfully. Na gode!";
+"✅ Comment posted successfully!";
+
+status.style.color=
+"#16803c";
 
 await loadComments();
 
-};
+}catch(error){
 
-loadComments();
-
-}
-
-
-/* SECURITY */
-
-function esc(value){
-
-return String(value)
-.replace(
-/[&<>'"]/g,
-function(char){
-
-return {
-
-"&":"&amp;",
-"<":"&lt;",
-">":"&gt;",
-"'":"&#39;",
-'"':"&quot;"
-
-}[char];
-
-}
+console.error(
+"Comment submit error:",
+error
 );
 
+status.textContent=
+"Unable to post comment right now.";
+
+}finally{
+
+button.disabled=false;
+button.textContent=
+"Post Comment";
+
 }
 
-})();
+});
 
+/* Initial comments load */
+
+await loadComments();
+
+}
+
+/* START */
+
+loadArticle();
+
+})();
 </script>
 
 </body>
