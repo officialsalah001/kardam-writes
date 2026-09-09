@@ -1,596 +1,186 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-<meta charset="utf-8">
-
-<meta
-name="viewport"
-content="width=device-width,initial-scale=1"
->
-
-<title>
-Videos | Hamza S.S Kardam Writes
-</title>
-
-<meta
-name="description"
-content="Watch Hausa-English videos from Hamza S.S Kardam Writes covering news, sports, technology, interviews and useful knowledge."
->
-
-<meta
-name="robots"
-content="index,follow"
->
-
-<link
-rel="canonical"
-href="https://officialsalah001.github.io/kardam-writes/videos.html"
->
-
-<link
-rel="stylesheet"
-href="style.css"
->
-
-<style>
-
-/* =========================
-   VIDEOS PAGE
-========================= */
-
-.videoPage{
-width:min(1100px,92%);
-margin:45px auto 65px;
-}
-
-/* HERO */
-
-.videoHero{
-padding:30px 0 35px;
-}
-
-.videoHero label{
-font-weight:800;
-letter-spacing:.08em;
-font-size:12px;
-}
-
-.videoHero h1{
-font-size:clamp(34px,6vw,58px);
-margin:10px 0;
-}
-
-.videoHero h1 em{
-font-style:normal;
-}
-
-.videoHero p{
-max-width:760px;
-line-height:1.8;
-color:#687386;
-}
-
-/* BACK BUTTON */
-
-.back{
-display:inline-block;
-margin-bottom:8px;
-}
-
-/* VIDEO GRID */
-
-.videoGrid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:22px;
-}
-
-/* CARD */
-
-.videoCard{
-border:1px solid #e4e6eb;
-border-radius:16px;
-overflow:hidden;
-background:#fff;
-box-shadow:0 8px 25px rgba(0,0,0,.05);
-transition:
-transform .2s ease,
-box-shadow .2s ease;
-}
-
-.videoCard:hover{
-transform:translateY(-4px);
-box-shadow:0 14px 35px rgba(0,0,0,.10);
-}
-
-/* VIDEO AREA */
-
-.videoFrame{
-aspect-ratio:16/9;
-background:
-linear-gradient(
-135deg,
-#0b1730,
-#1d3557
-);
-
-display:grid;
-place-items:center;
-}
-
-/* PLAY BUTTON */
-
-.play{
-width:68px;
-height:68px;
-
-border-radius:50%;
-
-background:#fff;
-color:#0b1730;
-
-display:grid;
-place-items:center;
-
-font-size:25px;
-
-box-shadow:
-0 8px 25px rgba(0,0,0,.20);
-}
-
-/* CARD BODY */
-
-.videoBody{
-padding:20px;
-}
-
-.videoBody h2{
-margin:0 0 9px;
-font-size:21px;
-}
-
-.videoBody p{
-color:#687386;
-line-height:1.7;
-margin:0;
-}
-
-/* YOUTUBE BUTTON */
-
-.videoBody a{
-display:inline-block;
-
-margin-top:14px;
-
-padding:11px 16px;
-
-border-radius:9px;
-
-background:#0b1730;
-color:#fff;
-
-text-decoration:none;
-
-font-weight:800;
-
-transition:
-opacity .2s ease,
-transform .2s ease;
-}
-
-.videoBody a:hover{
-opacity:.9;
-transform:translateY(-1px);
-}
-
-/* CHANNEL BOX */
-
-.channel{
-margin-top:28px;
-
-padding:24px;
-
-border-radius:16px;
-
-background:#f5f6f8;
-
-line-height:1.8;
-}
-
-.channel b{
-font-size:20px;
-}
-
-.channel a{
-display:inline-block;
-
-margin-top:14px;
-
-padding:11px 16px;
-
-border-radius:9px;
-
-background:#0b1730;
-color:#fff;
-
-text-decoration:none;
-
-font-weight:800;
-}
-
-/* MOBILE */
-
-@media(max-width:700px){
-
-.videoPage{
-margin-top:25px;
-}
-
-.videoGrid{
-grid-template-columns:1fr;
-}
-
-.videoHero h1{
-font-size:40px;
-}
-
-}
-
-</style>
-
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Kardam Writes Videos | News, Sports, Technology & Interviews</title>
+
+  <meta name="description"
+    content="Watch the latest videos from Kardam Writes including news, politics, sports, technology, education, interviews and discussions.">
+
+  <link rel="canonical"
+    href="https://officialsalah001.github.io/kardam-writes/videos.html">
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .videos-page {
+      max-width: 1200px;
+      margin: auto;
+      padding: 30px 16px 60px;
+    }
+
+    .videos-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .videos-header h1 {
+      margin-bottom: 10px;
+    }
+
+    .videos-header p {
+      opacity: .8;
+    }
+
+    .videos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .video-card {
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(0,0,0,.08);
+    }
+
+    .video-media {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #111;
+      overflow: hidden;
+    }
+
+    .video-media iframe,
+    .video-media video,
+    .video-media img {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      object-fit: cover;
+      display: block;
+    }
+
+    .video-content {
+      padding: 18px;
+    }
+
+    .video-content h2 {
+      font-size: 19px;
+      margin: 0 0 10px;
+    }
+
+    .video-description {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .video-category {
+      display: inline-block;
+      font-size: 13px;
+      padding: 5px 10px;
+      border-radius: 20px;
+      background: #f1f1f1;
+      margin-bottom: 10px;
+    }
+
+    .watch-btn {
+      display: inline-block;
+      padding: 10px 15px;
+      border-radius: 8px;
+      background: #111;
+      color: white;
+      text-decoration: none;
+      margin-top: 8px;
+    }
+
+    .watch-btn:hover {
+      opacity: .85;
+    }
+
+    .loading,
+    .empty,
+    .error {
+      text-align: center;
+      padding: 40px 15px;
+      grid-column: 1 / -1;
+    }
+
+    .channel-box {
+      text-align: center;
+      margin-top: 45px;
+      padding: 30px 20px;
+      border-radius: 14px;
+      background: #f5f5f5;
+    }
+
+    .channel-box a {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 12px 20px;
+      background: #d00;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+  </style>
 </head>
-
 
 <body>
 
-
-<!-- =========================
-     HEADER
-========================= -->
-
-<header>
-
-<div class="wrap nav">
-
-<a
-class="logo"
-href="index.html"
->
-
-<i>K</i>
-
-<span>
-
-Hamza S.S
-
-<small>
-KARDAM WRITES
-</small>
-
-</span>
-
-</a>
-
-
-<a
-class="wa"
-href="https://wa.me/2347077777636"
->
-
-WhatsApp
-
-</a>
-
-</div>
-
-</header>
-
-
-
-<!-- =========================
-     MAIN
-========================= -->
-
-<main class="videoPage">
-
-
-<a
-class="back"
-href="index.html"
->
-
-← Back to website
-
-</a>
-
-
-
-<!-- HERO -->
-
-<section class="videoHero">
-
-<label>
-VIDEOS • NEWS • SPORTS • TECHNOLOGY • INTERVIEWS
-</label>
-
-
-<h1>
-
-Videos & <em>Stories.</em>
-
-</h1>
-
-
-<p>
-
-Watch short Hausa-English updates,
-interviews, football discussions,
-technology tips and useful knowledge
-from Hamza S.S Kardam Writes.
-
-</p>
-
-</section>
-
-
-
-<!-- =========================
-     VIDEO CARDS
-========================= -->
-
-<section class="videoGrid">
-
-
-
-<!-- NEWS -->
-
-<article class="videoCard">
-
-<div class="videoFrame">
-
-<div class="play">
-▶
-</div>
-
-</div>
-
-
-<div class="videoBody">
-
-<h2>
-Latest News & Updates
-</h2>
-
-
-<p>
-
-Short Hausa-English updates on important
-stories, current affairs and developments.
-
-</p>
-
-
-<a
-href="https://www.youtube.com/@H.SKARDAM_TV"
-target="_blank"
-rel="noopener noreferrer"
->
-
-Watch on YouTube
-
-</a>
-
-</div>
-
-</article>
-
-
-
-<!-- SPORTS -->
-
-<article class="videoCard">
-
-<div class="videoFrame">
-
-<div class="play">
-▶
-</div>
-
-</div>
-
-
-<div class="videoBody">
-
-<h2>
-Sports & Football
-</h2>
-
-
-<p>
-
-Football talk, transfers, Premier League,
-La Liga, Super Eagles and major football stories.
-
-</p>
-
-
-<a
-href="https://www.youtube.com/@H.SKARDAM_TV"
-target="_blank"
-rel="noopener noreferrer"
->
-
-Watch on YouTube
-
-</a>
-
-</div>
-
-</article>
-
-
-
-<!-- TECHNOLOGY -->
-
-<article class="videoCard">
-
-<div class="videoFrame">
-
-<div class="play">
-▶
-</div>
-
-</div>
-
-
-<div class="videoBody">
-
-<h2>
-Technology & AI
-</h2>
-
-
-<p>
-
-Wayoyi, apps, AI, internet tips and practical
-technology knowledge explained simply.
-
-</p>
-
-
-<a
-href="https://www.youtube.com/@H.SKARDAM_TV"
-target="_blank"
-rel="noopener noreferrer"
->
-
-Watch on YouTube
-
-</a>
-
-</div>
-
-</article>
-
-
-
-<!-- INTERVIEWS -->
-
-<article class="videoCard">
-
-<div class="videoFrame">
-
-<div class="play">
-▶
-</div>
-
-</div>
-
-
-<div class="videoBody">
-
-<h2>
-Interviews & Discussions
-</h2>
-
-
-<p>
-
-Conversations, community discussions,
-opinions and useful ideas from different people.
-
-</p>
-
-
-<a
-href="https://www.youtube.com/@H.SKARDAM_TV"
-target="_blank"
-rel="noopener noreferrer"
->
-
-Watch on YouTube
-
-</a>
-
-</div>
-
-</article>
-
-
-
-</section>
-
-
-
-<!-- =========================
-     YOUTUBE CHANNEL
-========================= -->
-
-<div class="channel">
-
-<b>
-🎥 H.SKARDAM_TV
-</b>
-
-<br>
-
-Follow the channel for new Hausa-English
-videos, news, discussions and updates.
-
-<br>
-
-
-<a
-href="https://www.youtube.com/@H.SKARDAM_TV"
-target="_blank"
-rel="noopener noreferrer"
->
-
-Open YouTube Channel →
-
-</a>
-
-</div>
-
-
-</main>
-
-
-
-<!-- =========================
-     FOOTER
-========================= -->
-
-<footer>
-
-<div class="wrap foot">
-
-<div class="copy">
-
-©
-
-<span id="year"></span>
-
-Hamza S.S Kardam Writes
-
-</div>
-
-</div>
-
-</footer>
-
-
-
-<script>
-
-document.getElementById("year").textContent =
-new Date().getFullYear();
-
-</script>
-
-
-</body>
-
-</html>
+  <header>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="articles.html">Articles</a>
+      <a href="videos.html">Videos</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main class="videos-page">
+
+    <section class="videos-header">
+      <h1>Latest Videos</h1>
+      <p>
+        Watch the latest news, sports, technology, interviews and discussions
+        from Kardam Writes.
+      </p>
+    </section>
+
+    <section id="videosGrid" class="videos-grid">
+      <div class="loading">
+        Loading videos...
+      </div>
+    </section>
+
+    <section class="channel-box">
+      <h2>Follow Kardam Writes</h2>
+      <p>
+        Watch more videos and follow our latest updates on YouTube.
+      </p>
+
+      <a
+        href="https://www.youtube.com/@H.SKARDAM_TV"
+        target="_blank"
+        rel="noopener noreferrer">
+        Visit YouTube Channel
+      </a>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>
+      © <span id="year"></span> Kardam Writes. All rights reserved.
+    </p>
+  </footer>
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm
