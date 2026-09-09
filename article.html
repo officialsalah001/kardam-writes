@@ -3,30 +3,171 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+
 <title>Article | Hamza S.S Kardam Writes</title>
+
 <meta name="description" content="Read articles from Hamza S.S Kardam Writes.">
 <meta name="robots" content="index,follow">
+
 <link rel="stylesheet" href="style.css">
+
 <style>
-.articlePage{width:min(850px,92%);margin:60px auto}
-.articleMeta{color:#687386;font-size:12px}
-.articleContent{font-size:18px;line-height:1.9;white-space:pre-wrap}
-.articleHero{width:100%;max-height:430px;object-fit:cover;border-radius:14px;margin:20px 0}
-.back{display:inline-block;margin-bottom:15px}
+.articlePage{
+  width:min(850px,92%);
+  margin:60px auto;
+}
+
+.articleMeta{
+  color:#687386;
+  font-size:12px;
+}
+
+.articleContent{
+  font-size:18px;
+  line-height:1.9;
+  white-space:pre-wrap;
+}
+
+.articleHero{
+  width:100%;
+  max-height:430px;
+  object-fit:cover;
+  border-radius:14px;
+  margin:20px 0;
+}
+
+.back{
+  display:inline-block;
+  margin-bottom:15px;
+}
+
+/* COMMENTS */
+.comments{
+  margin-top:45px;
+  padding-top:30px;
+  border-top:1px solid #e4e6eb;
+}
+
+.comments h2{
+  margin-bottom:8px;
+}
+
+.commentForm{
+  display:grid;
+  gap:12px;
+  margin:20px 0 30px;
+}
+
+.commentForm label{
+  font-weight:700;
+  font-size:14px;
+}
+
+.commentForm input,
+.commentForm textarea{
+  width:100%;
+  box-sizing:border-box;
+  margin-top:6px;
+  padding:12px;
+  border:1px solid #d9dde5;
+  border-radius:8px;
+  font:inherit;
+}
+
+.commentForm textarea{
+  min-height:120px;
+  resize:vertical;
+}
+
+.commentForm button{
+  justify-self:start;
+  padding:12px 18px;
+  border:0;
+  border-radius:8px;
+  background:#0b1730;
+  color:#fff;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.commentStatus{
+  font-size:13px;
+}
+
+.commentList{
+  display:grid;
+  gap:12px;
+}
+
+.commentItem{
+  padding:16px;
+  border:1px solid #e4e6eb;
+  border-radius:10px;
+  background:#fff;
+}
+
+.commentItem strong{
+  display:block;
+  margin-bottom:5px;
+}
+
+.commentDate{
+  font-size:11px;
+  color:#687386;
+  margin-bottom:8px;
+}
+
+.commentText{
+  white-space:pre-wrap;
+  line-height:1.65;
+}
+
+.emptyComments{
+  color:#687386;
+  font-size:14px;
+}
+
+/* Anti-spam hidden field */
+.honeypot{
+  position:absolute;
+  left:-9999px;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+}
 </style>
 </head>
+
 <body>
 
 <header>
 <div class="wrap nav">
-<a class="logo" href="index.html"><i>K</i><span>Hamza S.S<small>KARDAM WRITES</small></span></a>
-<a class="wa" href="https://wa.me/2347077777636">WhatsApp</a>
+
+<a class="logo" href="index.html">
+<i>K</i>
+<span>
+Hamza S.S
+<small>KARDAM WRITES</small>
+</span>
+</a>
+
+<a class="wa" href="https://wa.me/2347077777636">
+WhatsApp
+</a>
+
 </div>
 </header>
 
 <main class="articlePage">
-<a class="back" href="index.html#articles">← Back to articles</a>
-<div id="state">Loading article...</div>
+
+<a class="back" href="index.html#articles">
+← Back to articles
+</a>
+
+<div id="state">
+Loading article...
+</div>
+
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -34,18 +175,30 @@
 <script src="supabase-client.js"></script>
 
 <script>
+
 (async function(){
 
 const state=document.getElementById("state");
-const id=new URLSearchParams(window.location.search).get("id");
+
+const id=new URLSearchParams(
+window.location.search
+).get("id");
 
 if(!id){
-state.innerHTML="<h2>Article not found</h2><p>No article was selected.</p>";
+
+state.innerHTML=
+"<h2>Article not found</h2>"+
+"<p>No article was selected.</p>";
+
 return;
 }
 
 if(!window.kardamSupabase){
-state.innerHTML="<h2>Connection error</h2><p>Database connection is unavailable.</p>";
+
+state.innerHTML=
+"<h2>Connection error</h2>"+
+"<p>Database connection is unavailable.</p>";
+
 return;
 }
 
@@ -61,55 +214,120 @@ const result=await sb
 .single();
 
 if(result.error){
+
 console.error(result.error);
-state.innerHTML="<h2>Unable to load article</h2><p>The article could not be loaded from the database.</p>";
+
+state.innerHTML=
+"<h2>Unable to load article</h2>"+
+"<p>The article could not be loaded from the database.</p>";
+
 return;
 }
 
 if(!result.data){
-state.innerHTML="<h2>Article not found</h2><p>This article is not available.</p>";
+
+state.innerHTML=
+"<h2>Article not found</h2>"+
+"<p>This article is not available.</p>";
+
 return;
 }
 
 const a=result.data;
 
-document.title=(a.title||"Article")+" | Hamza S.S Kardam Writes";
+document.title=
+(a.title||"Article")+
+" | Hamza S.S Kardam Writes";
 
-const description=String(a.excerpt||a.content||"").substring(0,155);
-document.querySelector('meta[name="description"]').content=description;
+const description=
+String(a.excerpt||a.content||"")
+.substring(0,155);
+
+document
+.querySelector('meta[name="description"]')
+.content=description;
 
 state.innerHTML=
+
 '<div class="articleMeta">'+
 esc(a.category_slug||"Article")+
 " · "+
 new Date(a.created_at).toLocaleDateString()+
 "</div>"+
-"<h1>"+esc(a.title||"Untitled Article")+"</h1>"+
-(a.image_url?
-'<img class="articleHero" src="'+esc(a.image_url)+'" alt="'+esc(a.title||"Article")+'">'
+
+"<h1>"+
+esc(a.title||"Untitled Article")+
+"</h1>"+
+
+(a.image_url ?
+
+'<img class="articleHero" src="'+
+esc(a.image_url)+
+'" alt="'+
+esc(a.title||"Article")+
+'">'
+
 :"")+
-(a.excerpt?
-"<p>"+esc(a.excerpt)+"</p>"
+
+(a.excerpt ?
+
+"<p>"+
+esc(a.excerpt)+
+"</p>"
+
 :"")+
+
 '<div class="articleContent">'+
 esc(a.content||"")+
 "</div>"+
-'<p class="articleMeta">Views: <span id="views">'+
+
+'<p class="articleMeta">'+
+"Views: <span id=\"views\">"+
 (a.views||0)+
-"</span></p>";
+"</span>"+
+"</p>";
+
+/* VIEW COUNTER */
 
 try{
-const view=await sb.rpc("increment_article_view",{article_id:Number(id)});
+
+const view=await sb.rpc(
+"increment_article_view",
+{
+article_id:Number(id)
+}
+);
+
 if(view.data!==null){
-document.getElementById("views").textContent=view.data;
+
+document.getElementById(
+"views"
+).textContent=view.data;
+
 }
+
 }catch(viewError){
-console.warn("View counter unavailable:",viewError);
+
+console.warn(
+"View counter unavailable:",
+viewError
+);
+
 }
+
+/* COMMENTS */
+
+renderComments(
+sb,
+Number(id)
+);
 
 }catch(error){
 
-console.error("Article error:",error);
+console.error(
+"Article error:",
+error
+);
 
 state.innerHTML=
 "<h2>Unable to load article</h2>"+
@@ -117,19 +335,280 @@ state.innerHTML=
 
 }
 
+
+/* COMMENTS FUNCTION */
+
+async function renderComments(
+sb,
+articleId
+){
+
+const box=document.createElement(
+"section"
+);
+
+box.className="comments";
+
+box.innerHTML=
+
+'<h2>💬 Comments / Ra’ayoyi</h2>'+
+
+'<p>'+
+"Ka bar ra’ayinka a kasa. "+
+"Comments masu amfani suna taimaka wajen gina al’umma."+
+"</p>"+
+
+'<form class="commentForm" id="commentForm">'+
+
+'<label>'+
+"Name"+
+'<input '+
+'id="commentName" '+
+'type="text" '+
+'maxlength="60" '+
+'minlength="2" '+
+'required '+
+'autocomplete="name">'+
+'</label>'+
+
+'<label>'+
+"Comment / Ra’ayi"+
+'<textarea '+
+'id="commentText" '+
+'maxlength="1000" '+
+'minlength="2" '+
+'required>'+
+'</textarea>'+
+'</label>'+
+
+'<label class="honeypot" aria-hidden="true">'+
+"Website"+
+'<input '+
+'id="website" '+
+'tabindex="-1" '+
+'autocomplete="off">'+
+'</label>'+
+
+'<button type="submit">'+
+"Post Comment"+
+"</button>"+
+
+'<div class="commentStatus" id="commentStatus"></div>'+
+
+"</form>"+
+
+'<div class="commentList" id="commentList"></div>';
+
+document
+.querySelector(".articlePage")
+.appendChild(box);
+
+const list=
+document.getElementById(
+"commentList"
+);
+
+const status=
+document.getElementById(
+"commentStatus"
+);
+
+
+/* LOAD COMMENTS */
+
+async function loadComments(){
+
+list.innerHTML=
+'<div class="emptyComments">'+
+"Loading comments..."+
+"</div>";
+
+const r=await sb
+.from("comments")
+.select(
+"id,article_id,name,comment,created_at"
+)
+.eq("article_id",articleId)
+.order(
+"created_at",
+{
+ascending:false
+}
+);
+
+if(r.error){
+
+console.error(r.error);
+
+list.innerHTML=
+'<div class="emptyComments">'+
+"Comments ba su samu damar lodawa yanzu."+
+"</div>";
+
+return;
+}
+
+if(
+!r.data||
+!r.data.length
+){
+
+list.innerHTML=
+'<div class="emptyComments">'+
+"Babu comment tukuna. Ka zama na farko."+
+"</div>";
+
+return;
+}
+
+list.innerHTML=
+
+r.data.map(
+c =>
+
+'<article class="commentItem">'+
+
+"<strong>"+
+esc(c.name)+
+"</strong>"+
+
+'<div class="commentDate">'+
+new Date(
+c.created_at
+).toLocaleString()+
+"</div>"+
+
+'<div class="commentText">'+
+esc(c.comment)+
+"</div>"+
+
+"</article>"
+
+).join("");
+
+}
+
+
+/* POST COMMENT */
+
+document
+.getElementById("commentForm")
+.onsubmit=async function(e){
+
+e.preventDefault();
+
+status.textContent="";
+
+const name=
+document
+.getElementById("commentName")
+.value
+.trim();
+
+const comment=
+document
+.getElementById("commentText")
+.value
+.trim();
+
+const website=
+document
+.getElementById("website")
+.value;
+
+if(website){
+
+status.textContent=
+"An hana spam comment.";
+
+return;
+}
+
+if(
+name.length<2||
+name.length>60||
+comment.length<2||
+comment.length>1000
+){
+
+status.textContent=
+"Please check your name and comment length.";
+
+return;
+}
+
+status.textContent=
+"Posting...";
+
+const r=await sb
+.from("comments")
+.insert({
+
+article_id:articleId,
+
+name:name,
+
+comment:comment
+
+});
+
+if(r.error){
+
+console.error(r.error);
+
+status.textContent=
+"Ba a iya aika comment ba. "+
+"Ka tabbatar comments table/RLS na Supabase sun ba public damar INSERT.";
+
+return;
+}
+
+document
+.getElementById("commentName")
+.value="";
+
+document
+.getElementById("commentText")
+.value="";
+
+status.textContent=
+"An aika comment successfully. Na gode!";
+
+await loadComments();
+
+};
+
+loadComments();
+
+}
+
+
+/* SECURITY */
+
 function esc(value){
-return String(value).replace(/[&<>'"]/g,function(char){
-return{
+
+return String(value)
+.replace(
+/[&<>'"]/g,
+function(char){
+
+return {
+
 "&":"&amp;",
 "<":"&lt;",
 ">":"&gt;",
 "'":"&#39;",
 '"':"&quot;"
+
 }[char];
-});
+
+}
+);
+
 }
 
 })();
+
 </script>
 
 </body>
