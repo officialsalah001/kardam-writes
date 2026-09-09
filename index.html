@@ -28,6 +28,7 @@
 <meta name="twitter:description" content="Hausa & English news, knowledge, stories, technology, sports, business and opportunities.">
 <meta name="twitter:image" content="https://officialsalah001.github.io/kardam-writes/profile.png">
 
+<!-- Google Search Console -->
 <meta name="google-site-verification" content="lre1z9E0LeUEES7Xtwef9-cxCFbQ1P6dcjpZK6ifeFo">
 
 <!-- Google Analytics -->
@@ -69,7 +70,7 @@ gtag('config', 'G-RVYLF0VGNZ');
 <span>Hamza S.S<small>KARDAM WRITES</small></span>
 </a>
 
-<button id="menu">☰</button>
+<button id="menu" aria-label="Open menu">☰</button>
 
 <nav id="nav">
 <a href="#home">Home</a>
@@ -84,7 +85,6 @@ gtag('config', 'G-RVYLF0VGNZ');
 
 </div>
 </header>
-
 
 <main>
 
@@ -141,7 +141,6 @@ HA/EN
 
 </div>
 
-
 <aside class="profile">
 
 <img src="profile.png" alt="Hamza S.S Kardam">
@@ -176,7 +175,6 @@ WhatsApp
 
 </section>
 
-
 <!-- TICKER -->
 <div class="ticker">
 
@@ -190,7 +188,6 @@ Business opportunities. Lifestyle. History. Opinion.
 </div>
 
 </div>
-
 
 <!-- ARTICLES -->
 <section class="section" id="articles">
@@ -209,11 +206,12 @@ Business opportunities. Lifestyle. History. Opinion.
 
 <input
 id="search"
+type="search"
+aria-label="Search articles"
 placeholder="Search articles..."
 >
 
 </div>
-
 
 <!-- FILTERS -->
 <div class="filters">
@@ -260,12 +258,9 @@ All
 
 </div>
 
-
 <div class="cards" id="cards">
 
-
 <!-- NEWS -->
-
 <article data-cat="news">
 
 <div class="pic p1">
@@ -287,7 +282,7 @@ Labarai masu muhimmanci daga Nigeria da duniya,
 tare da useful updates da bayanai masu amfani.
 </p>
 
-<a href="#" class="read">
+<a href="#articles" class="read">
 Read article →
 </a>
 
@@ -295,9 +290,7 @@ Read article →
 
 </article>
 
-
 <!-- POLITICS -->
-
 <article data-cat="politics">
 
 <div class="pic p2">
@@ -319,7 +312,7 @@ Bayanan siyasa, government policies, elections,
 leaders da abubuwan da suka shafi al'umma.
 </p>
 
-<a href="#" class="read">
+<a href="#articles" class="read">
 Read article →
 </a>
 
@@ -327,9 +320,7 @@ Read article →
 
 </article>
 
-
 <!-- SPORTS -->
-
 <article data-cat="sports">
 
 <div class="pic p3">
@@ -351,7 +342,7 @@ Premier League, La Liga, Champions League,
 Super Eagles, transfers da sauran labaran wasanni.
 </p>
 
-<a href="#" class="read">
+<a href="#articles" class="read">
 Read article →
 </a>
 
@@ -359,9 +350,7 @@ Read article →
 
 </article>
 
-
 <!-- EDUCATION -->
-
 <article data-cat="education">
 
 <div class="pic p4">
@@ -383,7 +372,7 @@ Digital knowledge is no longer optional.
 Ga dalilin da yasa skills na zamani suke da muhimmanci.
 </p>
 
-<a href="#" class="read">
+<a href="#articles" class="read">
 Read article →
 </a>
 
@@ -391,9 +380,7 @@ Read article →
 
 </article>
 
-
 <!-- HISTORY -->
-
 <article data-cat="history">
 
 <div class="pic p5">
@@ -415,7 +402,7 @@ Tarihi yana taimaka mana mu fahimci inda muka fito
 da inda za mu dosa.
 </p>
 
-<a href="#" class="read">
+<a href="#articles" class="read">
 Read article →
 </a>
 
@@ -423,9 +410,7 @@ Read article →
 
 </article>
 
-
 <!-- LIFESTYLE -->
-
 <article data-cat="lifestyle">
 
 <div class="pic p6">
@@ -447,7 +432,7 @@ Wasu ƙananan halaye ne suke iya haifar da
 babban canji a rayuwa.
 </p>
 
-<a href="#" class="read">
+<a href="#articles" class="read">
 Read article →
 </a>
 
@@ -455,9 +440,7 @@ Read article →
 
 </article>
 
-
 <!-- TECHNOLOGY -->
-
 <article data-cat="technology">
 
 <div class="pic p1">
@@ -479,7 +462,7 @@ From smartphones to AI, technology is changing
 how we learn, work and communicate.
 </p>
 
-<a href="#" class="read">
+<a href="#articles" class="read">
 Read article →
 </a>
 
@@ -487,9 +470,7 @@ Read article →
 
 </article>
 
-
 <!-- BUSINESS -->
-
 <article data-cat="business">
 
 <div class="pic p2">
@@ -511,7 +492,7 @@ Kasuwanci ba sai ka fara da babbar jari ba.
 Ka fara da abin da kake da shi.
 </p>
 
-<a href="#" class="read">
+<a href="#articles" class="read">
 Read article →
 </a>
 
@@ -519,9 +500,7 @@ Read article →
 
 </article>
 
-
 <!-- OPINION -->
-
 <article data-cat="opinion">
 
 <div class="pic p3">
@@ -543,14 +522,13 @@ Ra'ayoyi da analysis akan abubuwan da suka shafi
 rayuwa, al'umma da duniya.
 </p>
 
-<a href="#" class="read">
+<a href="#articles" class="read">
 Read article →
 </a>
 
 </div>
 
 </article>
-
 
 </div>
 
@@ -561,7 +539,6 @@ No articles found.
 </div>
 
 </section>
-
 
 <!-- CATEGORIES -->
 <section class="section soft" id="categories">
@@ -576,160 +553,94 @@ EXPLORE
 What You'll Find Here
 </h2>
 
-
 <div class="cats">
 
-
 <a href="#articles" data-j="news">
-
 <b>01</b>
-
-<h3>
-📰 News
-</h3>
-
+<h3>📰 News</h3>
 <p>
 Labarai daga Nigeria da duniya,
 tare da useful updates.
 </p>
-
 </a>
 
-
 <a href="#articles" data-j="politics">
-
 <b>02</b>
-
-<h3>
-🏛️ Politics
-</h3>
-
+<h3>🏛️ Politics</h3>
 <p>
 Siyasa, government, elections,
 policies da political analysis.
 </p>
-
 </a>
 
-
 <a href="#articles" data-j="sports">
-
 <b>03</b>
-
-<h3>
-⚽ Sports
-</h3>
-
+<h3>⚽ Sports</h3>
 <p>
 Football, transfers, Premier League,
 La Liga da Super Eagles.
 </p>
-
 </a>
 
-
 <a href="#articles" data-j="technology">
-
 <b>04</b>
-
-<h3>
-💻 Fasaha
-</h3>
-
+<h3>💻 Fasaha</h3>
 <p>
 Phones, apps, AI, internet
 and modern technology.
 </p>
-
 </a>
 
-
 <a href="#articles" data-j="education">
-
 <b>05</b>
-
-<h3>
-📚 Ilimi
-</h3>
-
+<h3>📚 Ilimi</h3>
 <p>
 Education, learning tips,
 skills & opportunities.
 </p>
-
 </a>
 
-
 <a href="#articles" data-j="business">
-
 <b>06</b>
-
-<h3>
-💼 Business
-</h3>
-
+<h3>💼 Business</h3>
 <p>
 Kasuwanci, products, services,
 deals and opportunities.
 </p>
-
 </a>
 
-
 <a href="#articles" data-j="lifestyle">
-
 <b>07</b>
-
-<h3>
-🌍 Rayuwa
-</h3>
-
+<h3>🌍 Rayuwa</h3>
 <p>
 Lifestyle, personal growth
 and everyday life.
 </p>
-
 </a>
 
-
 <a href="#articles" data-j="history">
-
 <b>08</b>
-
-<h3>
-📜 Tarihi
-</h3>
-
+<h3>📜 Tarihi</h3>
 <p>
 History, culture, people
 and stories worth remembering.
 </p>
-
 </a>
 
-
 <a href="#articles" data-j="opinion">
-
 <b>09</b>
-
-<h3>
-💭 Opinion
-</h3>
-
+<h3>💭 Opinion</h3>
 <p>
 Ra'ayi da analysis akan abubuwan
 da suka shafi al'umma.
 </p>
-
 </a>
-
 
 </div>
 
 </div>
 
 </section>
-
 
 <!-- BUSINESS -->
 <section class="business" id="business">
@@ -762,9 +673,7 @@ Chat on WhatsApp
 
 </div>
 
-
 <div class="services">
-
 
 <div>
 👗
@@ -774,7 +683,6 @@ Kayan mata da fashion materials
 </small>
 </div>
 
-
 <div>
 📱
 <b>Mobile Phones</b>
@@ -782,7 +690,6 @@ Kayan mata da fashion materials
 Buying & selling of phones
 </small>
 </div>
-
 
 <div>
 📶
@@ -792,7 +699,6 @@ SIM cards and data connectivity
 </small>
 </div>
 
-
 <div>
 🔄
 <b>MTN & Airtel Swap</b>
@@ -800,7 +706,6 @@ SIM cards and data connectivity
 SIM swap services
 </small>
 </div>
-
 
 <div>
 📢
@@ -810,13 +715,11 @@ Promote your business on our platform
 </small>
 </div>
 
-
 </div>
 
 </div>
 
 </section>
-
 
 <!-- ABOUT -->
 <section class="section" id="about">
@@ -868,7 +771,6 @@ Read More About Us
 
 </section>
 
-
 <!-- CONTACT -->
 <section class="section soft" id="contact">
 
@@ -891,79 +793,57 @@ or enquiries, reach out through any channel.
 
 </div>
 
-
 <div class="contacts">
 
-
 <a href="tel:+2347077777636">
-
 📞
-
 <span>
 Phone
 <small>
 +234 707 777 7636
 </small>
 </span>
-
 </a>
 
-
 <a href="https://wa.me/2347077777636">
-
 💬
-
 <span>
 WhatsApp
 <small>
 0707 777 7636
 </small>
 </span>
-
 </a>
 
-
 <a href="mailto:hamzasskardamwrites@gmail.com">
-
 ✉️
-
 <span>
 Email
 <small>
 hamzasskardamwrites@gmail.com
 </small>
 </span>
-
 </a>
 
-
 <a href="https://www.facebook.com/share/19ytxVvMq4/">
-
 f
-
 <span>
 Facebook
 <small>
 Visit our Facebook Page
 </small>
 </span>
-
 </a>
 
-
 <a href="https://www.youtube.com/@H.SKARDAM_TV">
-
 ▶
-
 <span>
 YouTube
 <small>
 H.SKARDAM_TV
 </small>
 </span>
-
 </a>
-
 
 </div>
 
@@ -973,12 +853,10 @@ H.SKARDAM_TV
 
 </main>
 
-
 <!-- FOOTER -->
 <footer>
 
 <div class="wrap foot">
-
 
 <div>
 
@@ -1000,7 +878,6 @@ Hausa & English • News • Politics • Sports • Knowledge • Technology �
 </p>
 
 </div>
-
 
 <div>
 
@@ -1038,7 +915,6 @@ Terms of Use
 
 </div>
 
-
 <div>
 
 <h4>
@@ -1059,9 +935,7 @@ WhatsApp
 
 </div>
 
-
 </div>
-
 
 <div class="copy">
 
@@ -1072,7 +946,6 @@ All rights reserved.
 </div>
 
 </footer>
-
 
 <!-- SCRIPTS -->
 
